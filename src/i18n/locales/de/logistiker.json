@@ -1,0 +1,59 @@
+{
+    "scenario": {
+        "title": "Szenario wählen",
+        "standard": {
+            "name": "Standardbetrieb",
+            "desc": "Ausgewogenes Verhältnis zwischen Pünktlichkeit und Kosten."
+        },
+        "peak": {
+            "name": "Peak-Saison",
+            "desc": "Maximale Auslastung und hohes Risiko für Verzögerungen."
+        },
+        "green": {
+            "name": "Green Logistics",
+            "desc": "Fokus auf CO2-Reduktion und Leerlauf-Minimierung."
+        }
+    },
+    "volumeLevel": {
+        "low": "Niedrig",
+        "normal": "Normal",
+        "peak": "Spitzenlast"
+    },
+    "staffingLevel": {
+        "low": "Unterbesetzt",
+        "normal": "Normal",
+        "high": "Voll besetzt"
+    },
+    "rampAvailability": {
+        "all": "Alle Rampen verfügbar",
+        "oneDown": "1 Rampe nicht verfügbar",
+        "twoDown": "2 Rampen nicht verfügbar"
+    },
+    "priorityPressure": {
+        "low": "Niedrig",
+        "medium": "Mittel",
+        "high": "Hoch"
+    },
+    "events": {
+        "truckLate": "Ankunft verspätet: LKW von {{carrier}} um {{delayMin}} Min verzögert.",
+        "dockBlocked": "Engpass: Rampe {{rampId}} blockiert durch Entladevorgang.",
+        "tempRisk": "Temperatur-Warnung: Kühlkette bei Sendung #{{shipmentId}} gefährdet."
+    },
+    "recommendations": {
+        "reschedule": {
+            "label": "Slot umplanen",
+            "desc": "Verschiebe {{truck}} auf {{time}}, um Stau zu vermeiden.",
+            "impact": "Spart {{waitTime}} Min Wartezeit"
+        },
+        "priority": {
+            "label": "Prio-Abfertigung",
+            "desc": "Ziehe {{truck}} vor, um SLA-Verstoß zu verhindern.",
+            "impact": "Vermeidet €{{penalty}} Strafe"
+        },
+        "staffUp": {
+            "label": "Personal erhöhen",
+            "desc": "Zusätzliches Team an Rampe {{rampId}} anfordern.",
+            "impact": "+{{throughput}}% Durchsatz"
+        }
+    }
+}

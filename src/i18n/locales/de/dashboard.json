@@ -1,0 +1,285 @@
+{
+    "timeline": {
+        "title": {
+            "logistiker": "Rampenplanung heute",
+            "carrier": "Verfügbare Zeitfenster"
+        },
+        "status": {
+            "all": "Alle Status",
+            "free": "Verfügbar",
+            "recommended": "Empfohlen",
+            "busy": "Belegt",
+            "critical": "Kritisch"
+        },
+        "headers": {
+            "time": "Zeit",
+            "truck": "LKW / Fahrer",
+            "details": "Details",
+            "status": "Status",
+            "action": "Aktion"
+        },
+        "searchPlaceholder": "Suchen...",
+        "noEntries": "Keine Einträge gefunden.",
+        "detailsButton": "Details"
+    },
+    "stats": {
+        "deliveriesToday": "Lieferungen heute",
+        "rampUtilization": "Rampenauslastung",
+        "avgWaitTime": "Ø Wartezeit",
+        "monthlySavings": "Einsparung/Monat"
+    },
+    "green": {
+        "co2Saved": "CO₂ eingespart/Monat",
+        "treesPlanted": "Bäume gepflanzt (Äquiv.)",
+        "idleEmissions": "Leerlauf-Emissionen",
+        "lessEmpty": "Weniger Leerfahrten",
+        "trackingTitle": "CO₂-Tracking & Reporting",
+        "trackingDesc": "Automatische Berechnung des CO₂-Fußabdrucks pro Lieferung mit CSRD-konformen Reports.",
+        "idleTitle": "Leerlauf-Reduktion",
+        "idleDesc": "Minimiert Leerlauf-Emissionen um 81% durch optimale Zeitfenster-Planung.",
+        "routingTitle": "Routen-Optimierung",
+        "routingDesc": "Intelligente Routenvorschläge sparen durchschnittlich 17km und 4kg CO₂ pro Lieferung.",
+        "priceTitle": "CO₂-Preis-Einsparung",
+        "priceDesc": "Bei €100/Tonne CO₂ = €280/Monat gespart. Tendenz steigend."
+    },
+    "benefits": {
+        "title": "Ihre Vorteile",
+        "logistics": {
+            "autoOptTitle": "Automatische Optimierung",
+            "autoOptDesc": "Die KI optimiert automatisch alle Zeitfenster basierend auf Ihren Präferenzen und Constraints.",
+            "transparencyTitle": "Live-Transparenz",
+            "transparencyDesc": "Sehen Sie in Echtzeit, welche Rampen belegt sind, wann Platz ist und wo Optimierungspotenzial liegt.",
+            "savingsTitle": "Messbare Einsparungen",
+            "savingsDesc": "Durchschnittlich €20.400/Monat – wir zeigen Ihnen VOR dem Start, was Sie sparen werden.",
+            "integrationTitle": "Einfache Integration",
+            "integrationDesc": "Verbindet sich mit Ihrem WMS, TMS und ERP. Keine Prozessänderungen notwendig."
+        },
+        "carrier": {
+            "slotsTitle": "Garantierte Zeitfenster",
+            "slotsDesc": "Buchen Sie Slots im Voraus – keine Wartezeiten mehr an der Rampe, planbare Routen.",
+            "routingTitle": "Bessere Tourenplanung",
+            "routingDesc": "Das System zeigt, welche Zeitfenster optimal zu Ihrer Route passen – spart Kilometer.",
+            "throughputTitle": "Mehr Lieferungen/Tag",
+            "throughputDesc": "Weniger Wartezeit = mehr Stops = mehr Umsatz. Durchschnittlich 3 zusätzliche Stops/Tag.",
+            "mobileTitle": "Mobile App für Fahrer",
+            "mobileDesc": "Alle gebuchten Zeitfenster, Routen und Änderungen in Echtzeit auf dem Smartphone."
+        },
+        "hospital": {
+            "prioTitle": "Prioritäts-Management",
+            "prioDesc": "Kritische Lieferungen wie Notfall-Medikamente und Blutkonserven werden automatisch priorisiert.",
+            "coldChainTitle": "Kühlketten-Überwachung",
+            "coldChainDesc": "Automatische Zuordnung zu temperaturgeführten Rampen mit lückenloser Dokumentation.",
+            "gdpTitle": "GDP-Compliance",
+            "gdpDesc": "Automatische Dokumentation für Pharma-Audits – Temperaturlogs, Zeitstempel, Abweichungen.",
+            "wasteTitle": "Verfall-Prävention",
+            "wasteDesc": "Verhindert verdorbene Ware durch optimale Kühlketten-Planung – spart €4.200/Monat."
+        },
+        "pharmacy": {
+            "routingTitle": "Apotheken-Routing",
+            "routingDesc": "Optimierte Multi-Stop-Routen for Apotheken-Belieferung – minimiert Gesamtfahrzeit.",
+            "coldChainTitle": "Kühlware-Priorisierung",
+            "coldChainDesc": "Temperaturgeführte Ware wird automatisch bevorzugt behandelt.",
+            "gdpTitle": "GDP-Dokumentation",
+            "gdpDesc": "Lückenlose Nachverfolgung aller Pharma-Lieferungen für Audits.",
+            "savingsTitle": "Route-Optimierung",
+            "savingsDesc": "Spart durchschnittlich 35 km pro Tag durch bessere Planung."
+        },
+        "medical": {
+            "sterileTitle": "Sterilgut-Handling",
+            "sterileDesc": "Dedizierte Clean Room Rampen für sterile Medizinprodukte.",
+            "specialTitle": "Spezialtransport",
+            "specialDesc": "Automatische Zuordnung für Schwertransporte und empfindliche Geräte.",
+            "hygieneTitle": "Hygiene-Compliance",
+            "hygieneDesc": "Automatische Reinigungs-Slots und Hygiene-Dokumentation.",
+            "protectionTitle": "Equipment-Schutz",
+            "protectionDesc": "Minimiert Wartezeiten für teure Medizintechnik – spart €7.4k/Monat."
+        }
+    },
+    "cta": {
+        "title": "Kostenlose Potenzialanalyse",
+        "subtitle": "Erfahren Sie, wie viel Sie mit AI2 Ramp Optimizer sparen können"
+    },
+    "modal": {
+        "aiRecommendation": "AI-Empfehlung",
+        "criticalDelivery": "Kritische Lieferung",
+        "busy": "Belegter Slot",
+        "available": "Verfügbarer Slot",
+        "recommended": "Empfohlener Slot",
+        "potentialAnalysis": "Potenzialanalyse",
+        "statTitle": "{{label}} – Details",
+        "howMeasured": "Wie wird das gemessen?",
+        "metricBasis": "Diese Metrik basiert auf echten Echtzeit-Daten aus Ihrem System und wird kontinuierlich validiert:",
+        "statsDetails": {
+            "timestamp": "Automatische Erfassung aller Zeitstempel",
+            "comparison": "Vergleich: Geplant vs. Tatsächlich",
+            "optimization": "Kontinuierliche Optimierung durch KI",
+            "transparency": "Transparentes Dashboard für Sie"
+        },
+        "seeExactNumbers": "Möchten Sie Ihre genauen Zahlen sehen?",
+        "potentialAnalysisDesc": "In einer kostenlosen Potenzialanalyse berechnen wir mit Ihren echten Daten, wie viel Sie sparen können.",
+        "whyOptimal": "Warum ist dieses Zeitfenster optimal?",
+        "optimalDetails": {
+            "waitTime": "Minimale Wartezeit für den LKW",
+            "resources": "Optimale Ressourcen-Auslastung",
+            "peaks": "Vermeidet Peak-Zeiten"
+        },
+        "estimatedSavings": "Geschätzte Einsparung",
+        "whyCritical": "Warum ist diese Lieferung kritisch?",
+        "criticalDetails": {
+            "score": "Priorisierung durch AI-Dringlichkeits-Score",
+            "reserved": "Reserviertes Zeitfenster",
+            "alerts": "SMS-Alerts bei Verzögerungen aktiv"
+        },
+        "emergencyHandling": "Notfall-Handling",
+        "emergencyDesc": "Dieses Zeitfenster ist geschützt und wird automatisch freigehalten, um Verzögerungen im Ablauf zu minimieren.",
+        "ctaSteps": {
+            "step1Title": "1. Potenzialanalyse (1-2 Wochen, kostenlos)",
+            "step1Desc": "Wir analysieren Ihre Daten und zeigen exakt, wie viel Sie sparen können.",
+            "step2Title": "2. Pilotphase (3 Monate)",
+            "step2Desc": "Sie zahlen nur 30% der nachgewiesenen Einsparung – absolut kein Risiko!",
+            "step3Title": "3. Dauerbetrieb (12+ Monate)",
+            "step3Desc": "Nach erfolgreichem Pilot: Langfristiger Vertrag mit garantiertem ROI."
+        },
+        "ctaFreeGuarantee": "Die Potenzialanalyse ist 100% kostenlos und unverbindlich."
+    },
+    "simulation": {
+        "title": "Simulation",
+        "parameters": "Parameter",
+        "selectScenario": "Szenario wählen",
+        "operationalLoad": "Auslastung (Operational Load)",
+        "rampAvailability": "Rampen-Verfügbarkeit",
+        "priorityPressure": "Prioritäts-Druck",
+        "staffingLevel": "Personal-Level",
+        "localSimulated": "Lokal simuliert",
+        "withAi": "mit KI",
+        "reduction": "Reduktion",
+        "measurable": "Messbar garantiert",
+        "optimalSpot": "Optimaler Spot",
+        "available": "Verfügbar",
+        "expressDelivery": "Express-Lieferung",
+        "standardDelivery": "Standard-Lieferung",
+        "aiOptimization": "AI-Optimierung",
+        "allRampsFree": "Alle Rampen frei",
+        "normalHandling": "Normal-Handling",
+        "avoidsBottlenecks": "Vermeidet Bottlenecks",
+        "flexiblePlanning": "Flexibel planbar",
+        "greenModuleDesc": "Automatische CO2-Berechnung & Tracking"
+    },
+    "decisionFeed": {
+        "liveEvents": "Operational Live-Feed",
+        "waitingForEvents": "Warte auf Ereignisse...",
+        "aiSupport": "AI Decision Support",
+        "systemOptimized": "System optimiert. Keine sofortigen Aktionen nötig.",
+        "strategy": "Strategie",
+        "expectedImpact": "Erwarteter Impact",
+        "waitTimeSaved": "Wartezeit",
+        "costSaved": "Ersparnis",
+        "recommendationApplied": "Empfehlung angewendet"
+    },
+    "roi": {
+        "title": "ROI-Rechner",
+        "costPerWaitHour": "Kosten pro Wartestunde (€)",
+        "trucksPerDay": "LKWs pro Tag",
+        "slaPenalty": "SLA-Strafe pro Verstoß (€)",
+        "today": "Heute",
+        "monthly": "Monatlich",
+        "breakdown": "Aufschlüsselung",
+        "waitingCostSaved": "Wartezeit gespart",
+        "penaltiesAvoided": "Strafen vermieden",
+        "laborOvertimeSaved": "Überstunden gespart",
+        "payback": {
+            "fast": "ROI in weniger als 3 Monaten",
+            "medium": "ROI in weniger als 6 Monaten",
+            "slow": "ROI innerhalb eines Jahres"
+        }
+    },
+    "explain": {
+        "whyThis": "Warum diese Empfehlung?",
+        "constraints": "Berücksichtigte Constraints",
+        "ifIgnored": "Was passiert ohne Aktion?",
+        "confidence": "Konfidenz",
+        "confidenceHigh": "Hoch",
+        "confidenceMedium": "Mittel",
+        "confidenceLow": "Niedrig",
+        "waitTime": "Wartezeit",
+        "risk": "Risiko",
+        "slaViolations": "SLA-Verstöße",
+        "late": {
+            "avoidBlock": "Vermeidet 25 Min Rampenblockade",
+            "allowPrio": "Ermöglicht Vorziehen von Prio-LKW #82",
+            "saveCost": "Reduziert Standzeit-Kosten"
+        },
+        "block": {
+            "clearCongestion": "Löst aktuellen Stau auf",
+            "increaseThroughput": "Erhöht Durchsatz um 15%",
+            "optimizeStaff": "Optimiert Personal-Einsatz"
+        },
+        "temp": {
+            "minimizeRisk": "Compliance-Risiko minimiert",
+            "protectValue": "Schützt Warenwert (€12k)",
+            "auditTrail": "Audit-Trail dokumentiert"
+        },
+        "constraintsList": {
+            "COLD_CHAIN": "Kühlkette muss gewährleistet bleiben",
+            "GDP": "GDP-Compliance erfordert lückenlose Dokumentation",
+            "FIFO": "First-In-First-Out Prinzip gewahrt",
+            "TIME_WINDOWS": "Zeitfenster-Bedingungen erfüllt",
+            "PEAK_BURSTS": "Peak-Auslastung kompensiert",
+            "RETURNS": "Retouren-Handling optimiert",
+            "TIME_TO_SHELF": "Schnelle Regalverfügbarkeit priorisiert"
+        },
+        "volume": {
+            "peak": "Hohes Volumen erfordert proaktive Umplanung"
+        },
+        "riskLevels": {
+            "high": "Hoch",
+            "medium": "Mittel",
+            "low": "Niedrig"
+        }
+    },
+    "comparison": {
+        "title": "Vorher vs. Nachher",
+        "beforeTitle": "Ohne AI2RampOptimizer",
+        "afterTitle": "Mit AI2RampOptimizer",
+        "optimalBadge": "Optimal",
+        "metrics": {
+            "waitTime": "Ø Wartezeit",
+            "utilization": "Rampenauslastung",
+            "delays": "Verspätungen / Tag",
+            "manualEffort": "Manueller Planungsaufwand",
+            "transparency": "Echtzeit-Transparenz",
+            "throughput": "Durchsatz"
+        }
+    },
+    "ctaSection": {
+        "title": "Überzeugt?",
+        "subtitle": "Testen Sie AI2RampOptimizer mit Ihren echten Daten in einer kostenlosen Potenzialanalyse.",
+        "button": "Kostenlose Potenzialanalyse anfordern"
+    },
+    "landingPage": {
+        "heroSub": "Intelligente Rampenplanung mit KI –",
+        "heroHighlight": "messbar, nachhaltig, effizient",
+        "logistics": {
+            "desc": "Optimieren Sie Ihre Rampenplanung – egal ob Lebensmittel, Fashion, Pharma oder Standard-Logistik",
+            "feature1": "Automatische Zeitfenster-Optimierung",
+            "feature2": "Branchenspezifische Anforderungen",
+            "feature3": "Kühlketten & Compliance",
+            "feature4": "Peak-Management"
+        },
+        "carrier": {
+            "desc": "Buchen Sie Zeitfenster im Voraus, optimieren Sie Ihre Touren und minimieren Sie Wartezeiten",
+            "feature1": "Zeitfenster-Buchungssystem",
+            "feature2": "Touren-Optimierung",
+            "feature3": "Multi-Location Support",
+            "feature4": "Mobile App für Fahrer"
+        },
+        "healthcare": {
+            "desc": "Kritische Lieferungen priorisieren, Kühlketten überwachen, GDP-Compliance sicherstellen",
+            "feature1": "Kritische Prioritäten (Notfall)",
+            "feature2": "Kühlketten-Management",
+            "feature3": "GDP/HACCP-Compliance",
+            "feature4": "Audit-Ready Dokumentation"
+        },
+        "trustMark": "Vertraut von führenden Logistikern weltweit"
+    }
+}

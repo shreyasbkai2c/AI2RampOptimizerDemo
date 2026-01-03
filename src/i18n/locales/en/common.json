@@ -1,0 +1,47 @@
+{
+    "appName": "AI2 Ramp Optimizer",
+    "dashboard": "Dashboard",
+    "simulation": "Simulation",
+    "searchPlaceholder": "Search...",
+    "reset": "Reset",
+    "close": "Close",
+    "bookDemo": "Book Demo",
+    "contact": "Contact",
+    "back": "Back",
+    "language": {
+        "de": "Deutsch",
+        "en": "English"
+    },
+    "greenModule": "Green Module",
+    "greenModuleTracking": "CO₂ tracking & environmental metrics",
+    "selectIndustry": "Select Industry",
+    "categories": {
+        "logistics": "Logistics Managers",
+        "carrier": "Carriers/Forwarders",
+        "healthcare": "Healthcare"
+    },
+    "industries": {
+        "general": "General Logistics",
+        "food": "Food & Beverage",
+        "fashion": "Fashion & Retail",
+        "pharma": "Pharma & Life Sciences",
+        "ftl": "Full Truck Load (FTL)",
+        "ltl": "Less Than Truckload (LTL)",
+        "express": "Express & Parcels",
+        "hospital": "Hospital",
+        "pharmacy": "Pharmacy Logistics",
+        "medical": "Medical Devices"
+    },
+    "actions": {
+        "start": "Start",
+        "pause": "Pause",
+        "apply": "Apply",
+        "accept": "Accept"
+    },
+    "events": {
+        "TRUCK_LATE": "Delay",
+        "DOCK_BLOCKED": "Blockage",
+        "TEMP_RISK": "Temp Risk",
+        "URGENT_ARRIVAL": "Urgent"
+    }
+}

@@ -1,56 +1,77 @@
-import { cn } from "@/lib/utils";
-import type { Comparison } from "@/data/categoryData";
+import { cn } from "@/lib/utils"
+import type { Comparison } from "@/data/categoryData"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { XCircle, CheckCircle2 } from "lucide-react"
+import { useTranslation } from "react-i18next"
 
 interface ComparisonSectionProps {
-  comparison: Comparison;
+  comparison: Comparison
 }
 
 export function ComparisonSection({ comparison }: ComparisonSectionProps) {
+  const { t } = useTranslation(["dashboard"])
+
   return (
-    <div className="bg-muted p-6 md:p-8 rounded-2xl mb-8">
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="text-xl md:text-2xl font-semibold text-foreground flex items-center gap-3">
-          📊 Vorher vs. Nachher
-        </h2>
-      </div>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div className="space-y-6">
+      <h2 className="text-lg font-semibold tracking-tight text-foreground md:text-xl">
+        📊 {t("dashboard:comparison.title")}
+      </h2>
+
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         {/* Before */}
-        <div className={cn(
-          "p-8 rounded-xl text-center",
-          "bg-red-50 border-3 border-red-300"
-        )}>
-          <div className="text-2xl font-bold mb-6 text-foreground">
-            ❌ Ohne AI2RampOptimizer
-          </div>
-          {comparison.before.map((metric, index) => (
-            <div key={index} className="my-5">
-              <div className="text-muted-foreground mb-2">{metric.label}</div>
-              <div className="text-4xl md:text-5xl font-bold text-destructive">
-                {metric.value}
-              </div>
+        <Card className="border-destructive/20 bg-destructive/5">
+          <CardHeader className="text-center pb-2">
+            <div className="flex justify-center mb-2">
+              <XCircle className="h-8 w-8 text-destructive" />
             </div>
-          ))}
-        </div>
-        
+            <CardTitle className="text-lg font-bold text-foreground">
+              {t("dashboard:comparison.beforeTitle")}
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="text-center space-y-6">
+            {comparison.before.map((metric, index) => (
+              <div key={index} className="space-y-1">
+                <p className="text-sm font-medium text-muted-foreground">
+                  {t(metric.label as any)}
+                </p>
+                <p className="text-3xl font-bold tracking-tight text-destructive md:text-4xl">
+                  {metric.value}
+                </p>
+              </div>
+            ))}
+          </CardContent>
+        </Card>
+
         {/* After */}
-        <div className={cn(
-          "p-8 rounded-xl text-center",
-          "bg-green-50 border-3 border-success"
-        )}>
-          <div className="text-2xl font-bold mb-6 text-foreground">
-            ✅ Mit AI2RampOptimizer
-          </div>
-          {comparison.after.map((metric, index) => (
-            <div key={index} className="my-5">
-              <div className="text-muted-foreground mb-2">{metric.label}</div>
-              <div className="text-4xl md:text-5xl font-bold text-success">
-                {metric.value}
-              </div>
+        <Card className="border-success/20 bg-success/5">
+          <CardHeader className="text-center pb-2">
+            <div className="flex justify-center mb-2">
+              <CheckCircle2 className="h-8 w-8 text-success" />
             </div>
-          ))}
-        </div>
+            <CardTitle className="text-lg font-bold text-foreground">
+              {t("dashboard:comparison.afterTitle")}
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="text-center space-y-6">
+            {comparison.after.map((metric, index) => (
+              <div key={index} className="space-y-1">
+                <p className="text-sm font-medium text-muted-foreground">
+                  {t(metric.label as any)}
+                </p>
+                <div className="flex items-center justify-center gap-2">
+                  <p className="text-3xl font-bold tracking-tight text-success md:text-4xl">
+                    {metric.value}
+                  </p>
+                  <Badge className="bg-success text-success-foreground hover:bg-success/90">
+                    {t("dashboard:comparison.optimalBadge")}
+                  </Badge>
+                </div>
+              </div>
+            ))}
+          </CardContent>
+        </Card>
       </div>
     </div>
-  );
+  )
 }

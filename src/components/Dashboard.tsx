@@ -1,149 +1,321 @@
-import { useState } from "react";
-import { categoryData, greenData, type TimeSlot, type Benefit } from "@/data/categoryData";
-import { AppHeader } from "./AppHeader";
-import { StatsGrid } from "./StatsGrid";
-import { Timeline } from "./Timeline";
-import { ComparisonSection } from "./ComparisonSection";
-import { BenefitsGrid } from "./BenefitsGrid";
-import { GreenModuleStats } from "./GreenModuleStats";
-import { CTASection } from "./CTASection";
-import { Modal, StatModalContent, SlotModalContent, CTAModalContent } from "./Modal";
+import { useMemo, useState, useEffect } from "react"
+import { useTranslation } from "react-i18next"
+import { categoryData, greenData, type TimeSlot, type Benefit } from "@/data/categoryData"
+import { AppHeader } from "./AppHeader"
+import { StatsGrid } from "./StatsGrid"
+import { Timeline } from "./Timeline"
+import { ComparisonSection } from "./ComparisonSection"
+import { BenefitsGrid } from "./BenefitsGrid"
+import { GreenModuleStats } from "./GreenModuleStats"
+import { CTASection } from "./CTASection"
+import { StatModalContent, SlotModalContent, CTAModalContent } from "./Modal"
+import { SimulationControls } from "./SimulationControls"
+import { DecisionFeed } from "./DecisionFeed"
+import { ROICalculator } from "./ROICalculator"
+import { useSimulationStore } from "@/store/simulationStore"
+import { LOGISTIKER_PRESETS } from "@/lib/simulation/presets"
+
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
+import { Button } from "@/components/ui/button"
 
 interface DashboardProps {
-  category: string;
-  onBack: () => void;
+  category: string
+  onBack: () => void
 }
 
-type ModalType = "stat" | "slot" | "cta" | null;
+type ModalType = "stat" | "slot" | "cta" | null
 
 export function Dashboard({ category, onBack }: DashboardProps) {
-  const [currentIndustry, setCurrentIndustry] = useState(() => {
-    const data = categoryData[category];
-    return Object.keys(data.industries)[0];
-  });
-  const [greenModuleEnabled, setGreenModuleEnabled] = useState(false);
-  const [modalType, setModalType] = useState<ModalType>(null);
-  const [modalData, setModalData] = useState<string | TimeSlot | null>(null);
+  const { t } = useTranslation(["dashboard", "common"])
+  const data = categoryData[category]
+  const { presetId, setPreset, controls, slots: simSlots, kpis: simKpis, baselineKpis, reset, shipments, updateControls } = useSimulationStore()
 
-  const data = categoryData[category];
-  const industryData = data.data[currentIndustry];
+  const [localIndustry, setLocalIndustry] = useState(() => {
+    const firstIndustry = Object.keys(data.industries)[0]
+    return firstIndustry
+  })
 
-  // Get benefits - handle both array and record types
-  let benefits: Benefit[];
-  if (Array.isArray(data.benefits)) {
-    benefits = data.benefits;
-  } else if (currentIndustry && data.benefits[currentIndustry]) {
-    benefits = data.benefits[currentIndustry];
-  } else {
-    benefits = Object.values(data.benefits)[0] || [];
-  }
+  // Source of truth for industry based on category
+  const activeIndustry = category === "logistics"
+    ? (LOGISTIKER_PRESETS.find(p => p.id === presetId)?.industry || "general")
+    : localIndustry
+
+  // Sync green module toggle
+  const greenModuleEnabled = controls.greenModuleEnabled
+  const setGreenModuleEnabled = (enabled: boolean) => updateControls({ greenModuleEnabled: enabled })
+
+  // Initialize simulation on first load for logistics
+  useEffect(() => {
+    if (category === "logistics") {
+      reset()
+    }
+  }, [category, reset])
+
+  // Simulation Loop
+  const playing = useSimulationStore(s => s.playing)
+  const tick = useSimulationStore(s => s.tick)
+  const speed = useSimulationStore(s => s.speed)
+
+  useEffect(() => {
+    let interval: any
+    if (playing && category === "logistics") {
+      interval = setInterval(() => {
+        tick()
+      }, 1000 / speed)
+    }
+    return () => clearInterval(interval)
+  }, [playing, speed, tick, category])
+
+  // Sync simulation industry
+  useEffect(() => {
+    if (category === "logistics") {
+      setLocalIndustry(activeIndustry)
+    }
+  }, [activeIndustry, category])
+
+  const [modalType, setModalType] = useState<ModalType>(null)
+  const [modalData, setModalData] = useState<string | TimeSlot | null>(null)
+
+  // Map Simulation data to UI components
+  const displayStats = useMemo(() => {
+    if (category !== "logistics") return data.data[activeIndustry].stats
+
+    return [
+      { icon: '📦', label: 'dashboard:stats.deliveriesToday', value: simKpis.shipmentVolume.toString(), trend: t("dashboard:simulation.localSimulated"), class: 'info' as const },
+      { icon: '⚡', label: 'dashboard:stats.rampUtilization', value: `${Math.round(simKpis.rampUtilizationPct)}%`, trend: `↗ +${Math.round(simKpis.rampUtilizationPct - baselineKpis.rampUtilizationPct)}% ${t("dashboard:simulation.withAi")}`, class: 'success' as const },
+      { icon: '⏱️', label: 'dashboard:stats.avgWaitTime', value: `${simKpis.avgWaitMin} Min`, trend: `↘ -${Math.round((1 - simKpis.avgWaitMin / baselineKpis.avgWaitMin) * 100)}% ${t("dashboard:simulation.reduction")}`, class: 'success' as const },
+      { icon: '💰', label: 'dashboard:stats.monthlySavings', value: `€${(simKpis.monthlySavingsEur / 1000).toFixed(1)}k`, trend: `↗ ${t("dashboard:simulation.measurable")}`, class: 'success' as const }
+    ]
+  }, [category, activeIndustry, data.data, simKpis, baselineKpis])
+
+  const displaySlots = useMemo(() => {
+    if (category !== "logistics") return data.data[activeIndustry].slots
+
+    return simSlots.map(slot => {
+      const shipment = shipments.find(s => s.id === slot.shipmentId)
+      return {
+        id: slot.id,
+        time: `${Math.floor(slot.startMin / 60).toString().padStart(2, '0')}:${(slot.startMin % 60).toString().padStart(2, '0')}`,
+        truck: shipment?.carrierName || (slot.status === "recommended" ? t("dashboard:simulation.optimalSpot") : t("dashboard:simulation.available")),
+        info: shipment ? (shipment.priority === "urgent" ? t("dashboard:simulation.expressDelivery") : t("dashboard:simulation.standardDelivery")) : (slot.status === "recommended" ? t("dashboard:simulation.aiOptimization") : t("dashboard:simulation.allRampsFree")),
+        details: shipment ? shipment.constraints.map(c => t(`dashboard:explain.constraintsList.${c}` as any)).join(', ') || t("dashboard:simulation.normalHandling") : (slot.status === "recommended" ? t("dashboard:simulation.avoidsBottlenecks") : t("dashboard:simulation.flexiblePlanning")),
+        status: slot.status,
+        location: slot.rampId
+      } as TimeSlot
+    }).sort((a, b) => a.time.localeCompare(b.time))
+  }, [category, activeIndustry, data.data, simSlots, shipments])
+
+  const displayComparison = useMemo(() => {
+    if (category !== "logistics") return data.data[activeIndustry].comparison
+
+    return {
+      before: [
+        { label: 'dashboard:comparison.metrics.waitTime', value: `${baselineKpis.avgWaitMin} Min` },
+        { label: 'dashboard:comparison.metrics.utilization', value: `${Math.round(baselineKpis.rampUtilizationPct)}%` },
+        { label: 'dashboard:comparison.metrics.delays', value: `${baselineKpis.slaViolations ?? 0}` }
+      ],
+      after: [
+        { label: 'dashboard:comparison.metrics.waitTime', value: `${simKpis.avgWaitMin} Min` },
+        { label: 'dashboard:comparison.metrics.utilization', value: `${Math.round(simKpis.rampUtilizationPct)}%` },
+        { label: 'dashboard:comparison.metrics.delays', value: `${simKpis.slaViolations ?? 0}` }
+      ]
+    }
+  }, [category, activeIndustry, data.data, simKpis, baselineKpis])
+
+  const benefits: Benefit[] = useMemo(() => {
+    if (Array.isArray(data.benefits)) return data.benefits
+    if (activeIndustry && data.benefits[activeIndustry]) return data.benefits[activeIndustry]
+    return Object.values(data.benefits)[0] || []
+  }, [data.benefits, activeIndustry])
 
   const handleStatClick = (label: string) => {
-    setModalData(label);
-    setModalType("stat");
-  };
+    setModalData(label)
+    setModalType("stat")
+  }
 
   const handleSlotClick = (slot: TimeSlot) => {
-    setModalData(slot);
-    setModalType("slot");
-  };
+    setModalData(slot)
+    setModalType("slot")
+  }
 
   const handleCTAClick = () => {
-    setModalType("cta");
-  };
+    setModalData(null)
+    setModalType("cta")
+  }
 
   const handleCloseModal = () => {
-    setModalType(null);
-    setModalData(null);
-  };
+    setModalType(null)
+    setModalData(null)
+  }
 
   const handleBookDemo = () => {
-    window.open("https://tucalendi.com/ai2connect", "_blank");
-  };
+    window.open("https://tucalendi.com/ai2connect", "_blank")
+  }
 
   const getModalTitle = () => {
     switch (modalType) {
       case "stat":
-        return `📊 ${modalData as string}`;
-      case "slot":
-        const slot = modalData as TimeSlot;
-        if (slot.status === "recommended") return "⭐ AI-Empfehlung";
-        if (slot.status === "critical") return "🔴 Kritische Lieferung";
-        return slot.status === "busy" ? "📦 Belegt" : "✅ Verfügbar";
+        // Handle both translated and raw labels
+        const rawLabel = modalData as string
+        const translatedLabel = rawLabel.includes(":") ? t(rawLabel as any) : rawLabel
+        return t("dashboard:modal.statTitle", { label: translatedLabel })
+      case "slot": {
+        const slot = modalData as TimeSlot
+        if (slot?.status === "recommended") return `⭐ ${t("dashboard:modal.aiRecommendation")}`
+        if (slot?.status === "critical") return `🔴 ${t("dashboard:modal.criticalDelivery")}`
+        return slot?.status === "busy" ? `📦 ${t("dashboard:modal.busy")}` : `✅ ${t("dashboard:modal.available")}`
+      }
       case "cta":
-        return "🎯 Kostenlose Potenzialanalyse";
+        return `🎯 ${t("dashboard:modal.potentialAnalysis")}`
       default:
-        return "";
+        return ""
     }
-  };
+  }
 
   const getTimelineTitle = () => {
-    return category === "carrier" ? "Verfügbare Zeitfenster" : "Rampenplanung heute";
-  };
+    return category === "carrier"
+      ? t("dashboard:timeline.title.carrier")
+      : t("dashboard:timeline.title.logistiker")
+  }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-svh bg-background">
       <AppHeader
         categoryName={data.name}
         categoryIcon={data.icon}
         industries={data.industries}
-        currentIndustry={currentIndustry}
-        onIndustryChange={setCurrentIndustry}
+        currentIndustry={activeIndustry}
+        onIndustryChange={(newIndustry) => {
+          if (category === "logistics") {
+            setPreset(newIndustry)
+          } else {
+            setLocalIndustry(newIndustry)
+          }
+        }}
         greenModuleEnabled={greenModuleEnabled}
         onToggleGreenModule={() => setGreenModuleEnabled(!greenModuleEnabled)}
         onBack={onBack}
       />
 
-      <div className="max-w-7xl mx-auto px-4 md:px-10 py-10">
-        <StatsGrid stats={industryData.stats} onStatClick={handleStatClick} />
+      <div className="container py-8 md:py-10">
+        <div className="space-y-10">
+          <StatsGrid stats={displayStats} onStatClick={handleStatClick} />
 
-        {greenModuleEnabled && <GreenModuleStats stats={greenData.stats} />}
+          {category === "logistics" && (
+            <div className="space-y-10">
+              <SimulationControls />
+              <DecisionFeed />
+              <ROICalculator />
+            </div>
+          )}
 
-        <Timeline
-          slots={industryData.slots}
-          title={getTimelineTitle()}
-          onSlotClick={handleSlotClick}
-        />
+          {category === "carrier" && (
+            <div className="space-y-10">
+              {/* Carrier specific layout if needed, otherwise default to similar */}
+            </div>
+          )}
 
-        <ComparisonSection comparison={industryData.comparison} />
+          {greenModuleEnabled && (
+            <div className="rounded-2xl border bg-card p-4 shadow-sm">
+              <GreenModuleStats stats={greenData.stats} />
+            </div>
+          )}
 
-        <BenefitsGrid
-          benefits={benefits}
-          greenBenefits={greenModuleEnabled ? greenData.benefits : undefined}
-        />
+          <div className="rounded-2xl border bg-card p-4 shadow-sm">
+            <Timeline
+              slots={displaySlots}
+              title={getTimelineTitle()}
+              onSlotClick={handleSlotClick}
+            />
+          </div>
 
-        <CTASection onCTAClick={handleCTAClick} />
+          <div className="rounded-2xl border bg-card p-4 shadow-sm">
+            <ComparisonSection comparison={displayComparison} />
+          </div>
+
+          <div className="rounded-2xl border bg-card p-4 shadow-sm">
+            <BenefitsGrid
+              benefits={benefits}
+              greenBenefits={greenModuleEnabled ? greenData.benefits : undefined}
+            />
+          </div>
+
+          <div className="rounded-2xl border bg-card p-4 shadow-sm">
+            <CTASection onCTAClick={handleCTAClick} />
+          </div>
+        </div>
       </div>
 
-      {/* Modals */}
-      <Modal
-        isOpen={modalType === "stat"}
-        onClose={handleCloseModal}
-        title={getModalTitle()}
-        onBookDemo={handleBookDemo}
-      >
-        <StatModalContent label={modalData as string} />
-      </Modal>
+      {/* shadcn Dialogs (replacing custom Modal) */}
+      <Dialog open={modalType === "stat"} onOpenChange={(o) => !o && handleCloseModal()}>
+        <DialogContent className="rounded-2xl sm:max-w-[560px]">
+          <DialogHeader>
+            <DialogTitle className="text-lg text-foreground">{getModalTitle()}</DialogTitle>
+          </DialogHeader>
 
-      <Modal
-        isOpen={modalType === "slot"}
-        onClose={handleCloseModal}
-        title={getModalTitle()}
-        onBookDemo={handleBookDemo}
-      >
-        {modalData && typeof modalData !== "string" && (
-          <SlotModalContent slot={modalData as TimeSlot} />
-        )}
-      </Modal>
+          <div className="space-y-4">
+            <StatModalContent label={modalData as string} />
 
-      <Modal
-        isOpen={modalType === "cta"}
-        onClose={handleCloseModal}
-        title={getModalTitle()}
-        onBookDemo={handleBookDemo}
-      >
-        <CTAModalContent />
-      </Modal>
+            <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
+              <Button variant="outline" className="rounded-xl" onClick={handleCloseModal}>
+                {t("common:close")}
+              </Button>
+              <Button className="rounded-xl" onClick={handleBookDemo}>
+                {t("common:bookDemo")}
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={modalType === "slot"} onOpenChange={(o) => !o && handleCloseModal()}>
+        <DialogContent className="rounded-2xl sm:max-w-[560px]">
+          <DialogHeader>
+            <DialogTitle className="text-lg text-foreground">{getModalTitle()}</DialogTitle>
+          </DialogHeader>
+
+          <div className="space-y-4">
+            {modalData && typeof modalData !== "string" && (
+              <SlotModalContent slot={modalData as TimeSlot} />
+            )}
+
+            <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
+              <Button variant="outline" className="rounded-xl" onClick={handleCloseModal}>
+                {t("common:close")}
+              </Button>
+              <Button className="rounded-xl" onClick={handleBookDemo}>
+                {t("common:bookDemo")}
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={modalType === "cta"} onOpenChange={(o) => !o && handleCloseModal()}>
+        <DialogContent className="rounded-2xl sm:max-w-[560px]">
+          <DialogHeader>
+            <DialogTitle className="text-lg text-foreground">{getModalTitle()}</DialogTitle>
+          </DialogHeader>
+
+          <div className="space-y-4">
+            <CTAModalContent />
+
+            <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
+              <Button variant="outline" className="rounded-xl" onClick={handleCloseModal}>
+                {t("common:close")}
+              </Button>
+              <Button className="rounded-xl" onClick={handleBookDemo}>
+                {t("common:bookDemo")}
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
-  );
+  )
 }

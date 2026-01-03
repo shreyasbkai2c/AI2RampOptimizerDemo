@@ -1,20 +1,32 @@
+import { Button } from "@/components/ui/button"
+import { ArrowRight } from "lucide-react"
+import { useTranslation } from "react-i18next"
+
 interface CTASectionProps {
-  onCTAClick: () => void;
+  onCTAClick: () => void
 }
 
 export function CTASection({ onCTAClick }: CTASectionProps) {
+  const { t } = useTranslation(["dashboard"])
+
   return (
-    <div className="gradient-primary text-white p-10 md:p-14 rounded-2xl text-center">
-      <h2 className="text-3xl md:text-4xl font-bold mb-4">Überzeugt?</h2>
-      <p className="text-lg md:text-xl mb-8 opacity-95">
-        Testen Sie AI2RampOptimizer mit Ihren echten Daten in einer kostenlosen Potenzialanalyse.
-      </p>
-      <button 
+    <div className="flex flex-col items-center justify-center space-y-6 py-8 text-center bg-card">
+      <div className="space-y-2">
+        <h2 className="text-2xl font-bold tracking-tight text-foreground md:text-3xl">
+          {t("dashboard:ctaSection.title")}
+        </h2>
+        <p className="mx-auto max-w-[600px] text-muted-foreground md:text-lg">
+          {t("dashboard:ctaSection.subtitle")}
+        </p>
+      </div>
+      <Button
+        size="lg"
         onClick={onCTAClick}
-        className="bg-white text-primary px-10 py-4 rounded-xl font-bold text-lg hover:scale-105 hover:shadow-lg transition-all duration-300"
+        className="rounded-xl px-8 font-semibold shadow-md transition-all hover:shadow-lg"
       >
-        Kostenlose Potenzialanalyse anfordern →
-      </button>
+        {t("dashboard:ctaSection.button")}
+        <ArrowRight className="ml-2 h-4 w-4" />
+      </Button>
     </div>
-  );
+  )
 }

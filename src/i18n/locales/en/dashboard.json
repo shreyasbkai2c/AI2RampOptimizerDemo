@@ -1,0 +1,285 @@
+{
+    "timeline": {
+        "title": {
+            "logistiker": "Dock Scheduling Today",
+            "carrier": "Available Time Slots"
+        },
+        "status": {
+            "all": "All Statuses",
+            "free": "Available",
+            "recommended": "Recommended",
+            "busy": "Busy",
+            "critical": "Critical"
+        },
+        "headers": {
+            "time": "Time",
+            "truck": "Truck / Driver",
+            "details": "Details",
+            "status": "Status",
+            "action": "Action"
+        },
+        "searchPlaceholder": "Search...",
+        "noEntries": "No entries found.",
+        "detailsButton": "Details"
+    },
+    "stats": {
+        "deliveriesToday": "Deliveries Today",
+        "rampUtilization": "Dock Utilization",
+        "avgWaitTime": "Avg. Wait Time",
+        "monthlySavings": "Monthly Savings"
+    },
+    "green": {
+        "co2Saved": "CO₂ saved/month",
+        "treesPlanted": "Trees planted (equiv.)",
+        "idleEmissions": "Idle Emissions",
+        "lessEmpty": "Less empty runs",
+        "trackingTitle": "CO₂ Tracking & Reporting",
+        "trackingDesc": "Automatic calculation of the CO₂ footprint per delivery with CSRD-compliant reports.",
+        "idleTitle": "Idle Time Reduction",
+        "idleDesc": "Minimizes idle emissions by 81% through optimal time slot planning.",
+        "routingTitle": "Route Optimization",
+        "routingDesc": "Intelligent route suggestions save an average of 17km and 4kg of CO₂ per delivery.",
+        "priceTitle": "CO₂ Price Savings",
+        "priceDesc": "At €100/tonne CO₂ = €280/month saved. Increasing trend."
+    },
+    "benefits": {
+        "title": "Your Benefits",
+        "logistics": {
+            "autoOptTitle": "Automatic Optimization",
+            "autoOptDesc": "The AI automatically optimizes all time slots based on your preferences and constraints.",
+            "transparencyTitle": "Live Transparency",
+            "transparencyDesc": "See in real-time which docks are occupied, where there is space, and where optimization potential lies.",
+            "savingsTitle": "Measurable Savings",
+            "savingsDesc": "Average €20,400/month – we show you BEFORE you start what you will save.",
+            "integrationTitle": "Easy Integration",
+            "integrationDesc": "Connects with your WMS, TMS, and ERP. No process changes required."
+        },
+        "carrier": {
+            "slotsTitle": "Guaranteed Time Slots",
+            "slotsDesc": "Book slots in advance – no more waiting times at the dock, planable routes.",
+            "routingTitle": "Better Tour Planning",
+            "routingDesc": "The system shows which time slots optimally fit your route – saves kilometers.",
+            "throughputTitle": "More Deliveries/Day",
+            "throughputDesc": "Less wait time = more stops = more revenue. Average 3 additional stops/day.",
+            "mobileTitle": "Mobile App for Drivers",
+            "mobileDesc": "All booked time slots, routes, and changes in real-time on the smartphone."
+        },
+        "hospital": {
+            "prioTitle": "Priority Management",
+            "prioDesc": "Critical deliveries like emergency medications and blood supplies are automatically prioritized.",
+            "coldChainTitle": "Cold Chain Monitoring",
+            "coldChainDesc": "Automatic assignment to temperature-controlled docks with seamless documentation.",
+            "gdpTitle": "GDP Compliance",
+            "gdpDesc": "Automatic documentation for pharma audits – temp logs, timestamps, deviations.",
+            "wasteTitle": "Waste Prevention",
+            "wasteDesc": "Prevents spoiled goods through optimal cold chain planning – saves €4,200/month."
+        },
+        "pharmacy": {
+            "routingTitle": "Pharmacy Routing",
+            "routingDesc": "Optimized multi-stop routes for pharmacy delivery – minimizes total travel time.",
+            "coldChainTitle": "Cold Chain Prioritization",
+            "coldChainDesc": "Temperature-controlled goods are automatically treated with preference.",
+            "gdpTitle": "GDP Documentation",
+            "gdpDesc": "Seamless tracking of all pharma deliveries for audits.",
+            "savingsTitle": "Route Optimization",
+            "savingsDesc": "Saves an average of 35 km per day through better planning."
+        },
+        "medical": {
+            "sterileTitle": "Sterile Goods Handling",
+            "sterileDesc": "Dedicated clean room docks for sterile medical products.",
+            "specialTitle": "Special Transport",
+            "specialDesc": "Automatic assignment for heavy transports and sensitive devices.",
+            "hygieneTitle": "Hygiene Compliance",
+            "hygieneDesc": "Automatic cleaning slots and hygiene documentation.",
+            "protectionTitle": "Equipment Protection",
+            "protectionDesc": "Minimizes wait times for expensive medical technology – saves €7.4k/month."
+        }
+    },
+    "cta": {
+        "title": "Free Potential Analysis",
+        "subtitle": "Discover how much you can save with AI2 Ramp Optimizer"
+    },
+    "modal": {
+        "aiRecommendation": "AI Recommendation",
+        "criticalDelivery": "Critical Delivery",
+        "busy": "Busy Slot",
+        "available": "Available Slot",
+        "recommended": "Recommended Slot",
+        "potentialAnalysis": "Potential Analysis",
+        "statTitle": "{{label}} – Details",
+        "howMeasured": "How is this measured?",
+        "metricBasis": "This metric is based on real-time data from your system and is continuously validated:",
+        "statsDetails": {
+            "timestamp": "Automatic recording of all timestamps",
+            "comparison": "Comparison: Planned vs. Actual",
+            "optimization": "Continuous optimization by AI",
+            "transparency": "Transparent dashboard for you"
+        },
+        "seeExactNumbers": "Want to see your exact numbers?",
+        "potentialAnalysisDesc": "In a free potential analysis, we calculate based on your real data how much you can save.",
+        "whyOptimal": "Why is this time slot optimal?",
+        "optimalDetails": {
+            "waitTime": "Minimal wait time for the truck",
+            "resources": "Optimal resource utilization",
+            "peaks": "Avoids peak times"
+        },
+        "estimatedSavings": "Estimated savings",
+        "whyCritical": "Why is this delivery critical?",
+        "criticalDetails": {
+            "score": "Prioritization by AI urgency score",
+            "reserved": "Reserved time slot",
+            "alerts": "SMS alerts active for delays"
+        },
+        "emergencyHandling": "Emergency Handling",
+        "emergencyDesc": "This time slot is protected and automatically kept free to minimize delays in the process.",
+        "ctaSteps": {
+            "step1Title": "1. Potential Analysis (1-2 weeks, free)",
+            "step1Desc": "We analyze your data and show exactly how much you can save.",
+            "step2Title": "2. Pilot Phase (3 months)",
+            "step2Desc": "You only pay 30% of the proven savings – absolutely no risk!",
+            "step3Title": "3. Continuous Operation (12+ months)",
+            "step3Desc": "After a successful pilot: Long-term contract with guaranteed ROI."
+        },
+        "ctaFreeGuarantee": "The potential analysis is 100% free and non-binding."
+    },
+    "simulation": {
+        "title": "Simulation",
+        "parameters": "Parameters",
+        "selectScenario": "Select Scenario",
+        "operationalLoad": "Operational Load",
+        "rampAvailability": "Ramp Availability",
+        "priorityPressure": "Priority Pressure",
+        "staffingLevel": "Staffing Level",
+        "localSimulated": "Locally simulated",
+        "withAi": "with AI",
+        "reduction": "reduction",
+        "measurable": "Measurably guaranteed",
+        "optimalSpot": "Optimal Spot",
+        "available": "Available",
+        "expressDelivery": "Express Delivery",
+        "standardDelivery": "Standard Delivery",
+        "aiOptimization": "AI Optimization",
+        "allRampsFree": "All docks free",
+        "normalHandling": "Normal handling",
+        "avoidsBottlenecks": "Avoids bottlenecks",
+        "flexiblePlanning": "Flexible planning",
+        "greenModuleDesc": "Automatic CO2 calculation & tracking"
+    },
+    "decisionFeed": {
+        "liveEvents": "Operational Live Feed",
+        "waitingForEvents": "Waiting for events...",
+        "aiSupport": "AI Decision Support",
+        "systemOptimized": "System optimized. No immediate actions required.",
+        "strategy": "Strategy",
+        "expectedImpact": "Expected Impact",
+        "waitTimeSaved": "Wait Time",
+        "costSaved": "Savings",
+        "recommendationApplied": "Recommendation applied"
+    },
+    "roi": {
+        "title": "ROI Calculator",
+        "costPerWaitHour": "Cost per Wait Hour (€)",
+        "trucksPerDay": "Trucks per Day",
+        "slaPenalty": "SLA Penalty per Violation (€)",
+        "today": "Today",
+        "monthly": "Monthly",
+        "breakdown": "Breakdown",
+        "waitingCostSaved": "Wait Cost Saved",
+        "penaltiesAvoided": "Penalties Avoided",
+        "laborOvertimeSaved": "Overtime Saved",
+        "payback": {
+            "fast": "ROI in less than 3 months",
+            "medium": "ROI in less than 6 months",
+            "slow": "ROI within one year"
+        }
+    },
+    "explain": {
+        "whyThis": "Why this recommendation?",
+        "constraints": "Matched Constraints",
+        "ifIgnored": "Impact if ignored",
+        "confidence": "Confidence",
+        "confidenceHigh": "High",
+        "confidenceMedium": "Medium",
+        "confidenceLow": "Low",
+        "waitTime": "Wait Time",
+        "risk": "Risk",
+        "slaViolations": "SLA Violations",
+        "late": {
+            "avoidBlock": "Avoids 25 min dock blockade",
+            "allowPrio": "Allows prioritizing high-prio truck #82",
+            "saveCost": "Reduces idle time costs"
+        },
+        "block": {
+            "clearCongestion": "Clears current congestion",
+            "increaseThroughput": "Increases throughput by 15%",
+            "optimizeStaff": "Optimizes staffing allocation"
+        },
+        "temp": {
+            "minimizeRisk": "Minimizes compliance risk",
+            "protectValue": "Protects goods value (€12k)",
+            "auditTrail": "Audit trail documented"
+        },
+        "constraintsList": {
+            "COLD_CHAIN": "Cold chain integrity must be maintained",
+            "GDP": "GDP compliance requires end-to-end documentation",
+            "FIFO": "First-In-First-Out principle upheld",
+            "TIME_WINDOWS": "Time window conditions met",
+            "PEAK_BURSTS": "Peak load compensated",
+            "RETURNS": "Returns handling optimized",
+            "TIME_TO_SHELF": "Fast shelf availability prioritized"
+        },
+        "volume": {
+            "peak": "High volume requires proactive rescheduling"
+        },
+        "riskLevels": {
+            "high": "High",
+            "medium": "Medium",
+            "low": "Low"
+        }
+    },
+    "comparison": {
+        "title": "Before vs. After",
+        "beforeTitle": "Without AI2RampOptimizer",
+        "afterTitle": "With AI2RampOptimizer",
+        "optimalBadge": "Optimal",
+        "metrics": {
+            "waitTime": "Avg. Wait Time",
+            "utilization": "Dock Utilization",
+            "delays": "Delays / Day",
+            "manualEffort": "Manual Planning Effort",
+            "transparency": "Real-time Transparency",
+            "throughput": "Throughput"
+        }
+    },
+    "ctaSection": {
+        "title": "Convinced?",
+        "subtitle": "Test AI2RampOptimizer with your real data in a free potential analysis.",
+        "button": "Request Free Potential Analysis"
+    },
+    "landingPage": {
+        "heroSub": "Intelligent dock scheduling with AI –",
+        "heroHighlight": "measurable, sustainable, efficient",
+        "logistics": {
+            "desc": "Optimize your dock scheduling – whether food, fashion, pharma, or standard logistics",
+            "feature1": "Automatic time slot optimization",
+            "feature2": "Industry-specific requirements",
+            "feature3": "Cold chain & compliance",
+            "feature4": "Peak management"
+        },
+        "carrier": {
+            "desc": "Book time slots in advance, optimize your tours, and minimize wait times",
+            "feature1": "Time slot booking system",
+            "feature2": "Tour optimization",
+            "feature3": "Multi-location support",
+            "feature4": "Mobile app for drivers"
+        },
+        "healthcare": {
+            "desc": "Prioritize critical deliveries, monitor cold chains, ensure GDP compliance",
+            "feature1": "Critical priorities (emergency)",
+            "feature2": "Cold chain management",
+            "feature3": "GDP/HACCP compliance",
+            "feature4": "Audit-ready documentation"
+        },
+        "trustMark": "Trusted by leading logistics companies worldwide"
+    }
+}

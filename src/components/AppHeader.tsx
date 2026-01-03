@@ -1,15 +1,27 @@
-import { cn } from "@/lib/utils";
-import { AI2RampOptimizerLogo } from "./AI2ConnectLogo";
+import { useMemo } from "react"
+import { useTranslation } from "react-i18next"
+import logoImage from "@/data/AI2RampOptimizerLogo.png"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Separator } from "@/components/ui/separator"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { LanguageToggle } from "@/components/common/LanguageToggle"
 
 interface AppHeaderProps {
-  categoryName: string;
-  categoryIcon: string;
-  industries: Record<string, string>;
-  currentIndustry: string;
-  onIndustryChange: (industry: string) => void;
-  greenModuleEnabled: boolean;
-  onToggleGreenModule: () => void;
-  onBack: () => void;
+  categoryName: string
+  categoryIcon: string
+  industries: Record<string, string>
+  currentIndustry: string
+  onIndustryChange: (industry: string) => void
+  greenModuleEnabled: boolean
+  onToggleGreenModule: () => void
+  onBack: () => void
 }
 
 export function AppHeader({
@@ -20,70 +32,74 @@ export function AppHeader({
   onIndustryChange,
   greenModuleEnabled,
   onToggleGreenModule,
-  onBack
+  onBack,
 }: AppHeaderProps) {
+  const { t } = useTranslation(["common"])
+
+  const displayCategoryName = categoryName.includes(":") ? t(categoryName as any) : categoryName
+
   return (
-    <header className="gradient-header text-white px-4 md:px-10 py-5 flex flex-wrap justify-between items-center gap-4 sticky top-0 z-50 shadow-md">
-      <div className="flex items-center gap-3">
-        <AI2RampOptimizerLogo size="md" />
-        <span className="text-lg md:text-xl font-bold">AI2RampOptimizer</span>
-      </div>
-      
-      <div className="flex flex-wrap items-center gap-3">
-        {/* Category Badge */}
-        <span className="bg-white/20 px-4 py-2 rounded-full text-sm font-medium">
-          {categoryIcon} {categoryName}
-        </span>
-        
-        {/* Industry Selector */}
-        <select 
-          className={cn(
-            "bg-white/15 border-2 border-white/30 text-white",
-            "px-4 py-2 rounded-lg text-sm font-semibold",
-            "cursor-pointer appearance-none pr-10",
-            "focus:outline-none focus:border-white"
-          )}
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='white' d='M6 9L1 4h10z'/%3E%3C/svg%3E")`,
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "right 12px center"
-          }}
-          value={currentIndustry}
-          onChange={(e) => onIndustryChange(e.target.value)}
-        >
-          {Object.entries(industries).map(([key, label]) => (
-            <option key={key} value={key} className="text-foreground">
-              {label}
-            </option>
-          ))}
-        </select>
-        
-        {/* Green Module Toggle */}
-        <button
-          onClick={onToggleGreenModule}
-          className={cn(
-            "px-4 py-2 rounded-lg text-sm font-semibold",
-            "border-2 transition-all duration-300",
-            greenModuleEnabled 
-              ? "bg-white/30 border-white" 
-              : "bg-white/10 border-white/30 hover:bg-white/20"
-          )}
-        >
-          🌱 Green Module
-        </button>
-        
-        {/* Back Button */}
-        <button
-          onClick={onBack}
-          className={cn(
-            "px-5 py-2 rounded-lg font-semibold",
-            "bg-white/20 border-2 border-white",
-            "hover:bg-white hover:text-secondary transition-all duration-300"
-          )}
-        >
-          ← Zurück
-        </button>
+    <header className="sticky top-0 z-50 border-b bg-background/80 backdrop-blur">
+      <div className="container flex flex-col gap-3 py-4 md:flex-row md:items-center md:justify-between">
+        {/* Brand */}
+        <div className="flex items-center gap-3">
+          <img src={logoImage} alt="AI2RampOptimizer Logo" className="h-9 w-auto" />
+          <div className="leading-tight">
+            <div className="text-base font-semibold tracking-tight text-foreground md:text-lg">
+              AI2RampOptimizer
+            </div>
+            <div className="text-xs text-muted-foreground">
+              {t("dashboard")} • {displayCategoryName}
+            </div>
+          </div>
+        </div>
+
+        {/* Controls */}
+        <div className="flex flex-wrap items-center gap-2 md:justify-end">
+          <Badge variant="secondary" className="rounded-full px-3 py-1 text-sm">
+            {categoryIcon} {displayCategoryName}
+          </Badge>
+
+          <Separator orientation="vertical" className="hidden h-8 md:block" />
+
+          {/* Industry Select */}
+          {useMemo(() => (
+            <Select
+              key={`industry-select-${categoryName}`}
+              value={currentIndustry}
+              onValueChange={onIndustryChange}
+            >
+              <SelectTrigger className="w-[220px] rounded-xl">
+                <SelectValue placeholder={t("selectIndustry")} />
+              </SelectTrigger>
+              <SelectContent>
+                {Object.entries(industries).map(([key, label]) => (
+                  <SelectItem key={key} value={key}>
+                    {label.includes(":") ? t(label as any) : label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          ), [categoryName, currentIndustry, industries, onIndustryChange, t])}
+
+          {/* Green module toggle */}
+          <Button
+            variant={greenModuleEnabled ? "secondary" : "outline"}
+            className="rounded-xl"
+            onClick={onToggleGreenModule}
+          >
+            🌱 {t("greenModule")}
+          </Button>
+
+          {/* Language Toggle */}
+          <LanguageToggle />
+
+          {/* Back */}
+          <Button variant="outline" className="rounded-xl" onClick={onBack}>
+            {t("back")}
+          </Button>
+        </div>
       </div>
     </header>
-  );
+  )
 }

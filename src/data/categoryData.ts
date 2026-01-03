@@ -7,6 +7,7 @@ export interface Stat {
 }
 
 export interface TimeSlot {
+  id: string;
   time: string;
   truck: string;
   info: string;
@@ -33,49 +34,49 @@ export interface IndustryData {
 }
 
 export interface CategoryInfo {
-  name: string;
+  name: string; // Translation key: common:categories.xxx
   icon: string;
-  industries: Record<string, string>;
+  industries: Record<string, string>; // Values are translation keys: common:industries.xxx
   data: Record<string, IndustryData>;
   benefits: Benefit[] | Record<string, Benefit[]>;
 }
 
 export const categoryData: Record<string, CategoryInfo> = {
   logistics: {
-    name: 'Logistiker',
+    name: 'common:categories.logistics',
     icon: '🏢',
     industries: {
-      general: 'Logistik Allgemein',
-      food: 'Lebensmittel',
-      fashion: 'Fashion & Retail',
-      pharma: 'Pharma & Life Sciences'
+      general: 'common:industries.general',
+      food: 'common:industries.food',
+      fashion: 'common:industries.fashion',
+      pharma: 'common:industries.pharma'
     },
     data: {
       general: {
         stats: [
-          { icon: '📦', label: 'Lieferungen heute', value: '52', trend: '↗ +8 mehr als geplant', class: 'info' },
-          { icon: '⚡', label: 'Rampenauslastung', value: '89%', trend: '↗ +32% mit KI', class: 'success' },
-          { icon: '⏱️', label: 'Ø Wartezeit', value: '16 Min', trend: '↘ -45% Reduktion', class: 'success' },
-          { icon: '💰', label: 'Einsparung/Monat', value: '€20.4k', trend: '↗ Messbar garantiert', class: 'success' }
+          { icon: '📦', label: 'dashboard:stats.deliveriesToday', value: '52', trend: '↗ +8 mehr als geplant', class: 'info' },
+          { icon: '⚡', label: 'dashboard:stats.rampUtilization', value: '89%', trend: '↗ +32% mit KI', class: 'success' },
+          { icon: '⏱️', label: 'dashboard:stats.avgWaitTime', value: '16 Min', trend: '↘ -45% Reduktion', class: 'success' },
+          { icon: '💰', label: 'dashboard:stats.monthlySavings', value: '€20.4k', trend: '↗ Messbar garantiert', class: 'success' }
         ],
         slots: [
-          { time: '08:00', truck: 'LKW #1247', info: 'Standard-Lieferung', details: '15 Paletten', status: 'busy' },
-          { time: '09:00', truck: 'LKW #2891', info: 'Express-Lieferung', details: '22 Paletten', status: 'busy' },
-          { time: '10:00', truck: 'Optimal für Mix', info: 'Spart 27 Min', details: 'Rampe 2 optimal', status: 'recommended' },
-          { time: '11:00', truck: 'Verfügbar', info: 'Alle Rampen frei', details: 'Flexibel planbar', status: 'free' },
-          { time: '12:00', truck: 'LKW #4782', info: 'Container-Entladung', details: '30 Paletten', status: 'busy' },
-          { time: '13:00', truck: 'AI-Empfehlung', info: 'Spart 18 Min', details: 'Peak vermeiden', status: 'recommended' }
+          { id: 'sped-int-1', time: '08:00', truck: 'LKW #1247', info: 'Standard-Lieferung', details: '15 Paletten', status: 'busy' },
+          { id: 'sped-int-2', time: '09:00', truck: 'LKW #2891', info: 'Express-Lieferung', details: '22 Paletten', status: 'busy' },
+          { id: 'sped-int-3', time: '10:00', truck: 'Optimal für Mix', info: 'Spart 27 Min', details: 'Rampe 2 optimal', status: 'recommended' },
+          { id: 'sped-int-4', time: '11:00', truck: 'Verfügbar', info: 'Alle Rampen frei', details: 'Flexibel planbar', status: 'free' },
+          { id: 'sped-int-5', time: '12:00', truck: 'LKW #4782', info: 'Container-Entladung', details: '30 Paletten', status: 'busy' },
+          { id: 'sped-int-6', time: '13:00', truck: 'AI-Empfehlung', info: 'Spart 18 Min', details: 'Peak vermeiden', status: 'recommended' }
         ],
         comparison: {
           before: [
-            { label: 'Wartezeit', value: '29 Min' },
-            { label: 'Auslastung', value: '67%' },
-            { label: 'Kosten', value: '€29.2k' }
+            { label: 'dashboard:comparison.metrics.waitTime', value: '29 Min' },
+            { label: 'dashboard:comparison.metrics.utilization', value: '67%' },
+            { label: 'dashboard:comparison.metrics.delays', value: '€29.2k' }
           ],
           after: [
-            { label: 'Wartezeit', value: '16 Min' },
-            { label: 'Auslastung', value: '89%' },
-            { label: 'Kosten', value: '€8.8k' }
+            { label: 'dashboard:comparison.metrics.waitTime', value: '16 Min' },
+            { label: 'dashboard:comparison.metrics.utilization', value: '89%' },
+            { label: 'dashboard:comparison.metrics.delays', value: '€8.8k' }
           ]
         }
       },
@@ -84,15 +85,15 @@ export const categoryData: Record<string, CategoryInfo> = {
           { icon: '🧊', label: 'Kühl-/TK-Lieferungen', value: '28', trend: 'Alle konform', class: 'info' },
           { icon: '⏱️', label: 'FIFO-Konformität', value: '98%', trend: '↗ +12% vs. manuell', class: 'success' },
           { icon: '🌡️', label: 'Temperatur-Breaks', value: '0', trend: 'HACCP-konform', class: 'success' },
-          { icon: '💰', label: 'Einsparung/Monat', value: '€12.8k', trend: '↗ Verderb verhindert', class: 'success' }
+          { icon: '💰', label: 'dashboard:stats.monthlySavings', value: '€12.8k', trend: '↗ Verderb verhindert', class: 'success' }
         ],
         slots: [
-          { time: '08:00', truck: 'Frischware Express', info: 'FIFO Priorität', details: 'Rampe 1 (Kühl)', status: 'critical' },
-          { time: '09:00', truck: 'Tiefkühl-Lieferung', info: '-18°C TK', details: 'Rampe 2 (TK)', status: 'busy' },
-          { time: '10:00', truck: 'Optimal Kühlware', info: 'Spart 22 Min', details: 'Kühlkette optimal', status: 'recommended' },
-          { time: '11:00', truck: 'Trockenwaren', info: 'Standard', details: 'Rampe 4', status: 'busy' },
-          { time: '12:00', truck: 'Hygiene-Zeitfenster', info: 'Nach Reinigung', details: 'Rampe 1 gereinigt', status: 'free' },
-          { time: '13:00', truck: 'Fresh & Fast', info: 'Expressware', details: 'Spart 15 Min', status: 'recommended' }
+          { id: 'food-1', time: '08:00', truck: 'Frischware Express', info: 'FIFO Priorität', details: 'Rampe 1 (Kühl)', status: 'critical' },
+          { id: 'food-2', time: '09:00', truck: 'Tiefkühl-Lieferung', info: '-18°C TK', details: 'Rampe 2 (TK)', status: 'busy' },
+          { id: 'food-3', time: '10:00', truck: 'Optimal Kühlware', info: 'Spart 22 Min', details: 'Kühlkette optimal', status: 'recommended' },
+          { id: 'food-4', time: '11:00', truck: 'Trockenwaren', info: 'Standard', details: 'Rampe 4', status: 'busy' },
+          { id: 'food-5', time: '12:00', truck: 'Hygiene-Zeitfenster', info: 'Nach Reinigung', details: 'Rampe 1 gereinigt', status: 'free' },
+          { id: 'food-6', time: '13:00', truck: 'Fresh & Fast', info: 'Expressware', details: 'Spart 15 Min', status: 'recommended' }
         ],
         comparison: {
           before: [
@@ -112,15 +113,15 @@ export const categoryData: Record<string, CategoryInfo> = {
           { icon: '📦', label: 'Lieferungen/Tag', value: '68', trend: 'Peak-Saison', class: 'info' },
           { icon: '🔄', label: 'Returns-Rate', value: '18%', trend: 'Optimal gehandelt', class: 'success' },
           { icon: '⏱️', label: 'Time-to-Shelf', value: '4.2h', trend: '↘ -38% schneller', class: 'success' },
-          { icon: '💰', label: 'Einsparung/Monat', value: '€15.2k', trend: '↗ Peak-Optimierung', class: 'success' }
+          { icon: '💰', label: 'dashboard:stats.monthlySavings', value: '€15.2k', trend: '↗ Peak-Optimierung', class: 'success' }
         ],
         slots: [
-          { time: '08:00', truck: 'Hängend Fashion', info: 'Pre-Season', details: 'Rampe 1 (Hängend)', status: 'busy' },
-          { time: '09:00', truck: 'Accessories Mix', info: 'Multi-Brand', details: '45 Kartons', status: 'busy' },
-          { time: '10:00', truck: 'Peak-Optimierung', info: 'Spart 28 Min', details: 'Vermeidet Stoßzeit', status: 'recommended' },
-          { time: '11:00', truck: 'Returns-Welle', info: 'Retouren-Handling', details: 'Rampe 3', status: 'busy' },
-          { time: '12:00', truck: 'Express New Collection', info: 'Zeitkritisch', details: 'Launch morgen!', status: 'critical' },
-          { time: '13:00', truck: 'Optimal Fashion', info: 'Nach Peak', details: 'Spart 19 Min', status: 'recommended' }
+          { id: 'fashion-1', time: '08:00', truck: 'Hängend Fashion', info: 'Pre-Season', details: 'Rampe 1 (Hängend)', status: 'busy' },
+          { id: 'fashion-2', time: '09:00', truck: 'Accessories Mix', info: 'Multi-Brand', details: '45 Kartons', status: 'busy' },
+          { id: 'fashion-3', time: '10:00', truck: 'Peak-Optimierung', info: 'Spart 28 Min', details: 'Vermeidet Stoßzeit', status: 'recommended' },
+          { id: 'fashion-4', time: '11:00', truck: 'Returns-Welle', info: 'Retouren-Handling', details: 'Rampe 3', status: 'busy' },
+          { id: 'fashion-5', time: '12:00', truck: 'Express New Collection', info: 'Zeitkritisch', details: 'Launch morgen!', status: 'critical' },
+          { id: 'fashion-6', time: '13:00', truck: 'Optimal Fashion', info: 'Nach Peak', details: 'Spart 19 Min', status: 'recommended' }
         ],
         comparison: {
           before: [
@@ -140,15 +141,15 @@ export const categoryData: Record<string, CategoryInfo> = {
           { icon: '🔬', label: 'Validierte Lieferungen', value: '45', trend: '100% GDP-konform', class: 'info' },
           { icon: '🧊', label: 'Kühlketten-Integrität', value: '100%', trend: '2-8°C durchgehend', class: 'success' },
           { icon: '📋', label: 'Audit-Readiness', value: '100%', trend: 'Vollständig dokumentiert', class: 'success' },
-          { icon: '💰', label: 'Einsparung/Monat', value: '€18.4k', trend: '↗ Compliance + Effizienz', class: 'success' }
+          { icon: '💰', label: 'dashboard:stats.monthlySavings', value: '€18.4k', trend: '↗ Compliance + Effizienz', class: 'success' }
         ],
         slots: [
-          { time: '08:00', truck: 'Vakzine Express', info: '2-8°C GDP', details: 'Rampe 1 (Validiert)', status: 'critical' },
-          { time: '09:00', truck: 'Routine Pharma', info: 'GDP-Dokumentiert', details: 'Rampe 2', status: 'busy' },
-          { time: '10:00', truck: 'Optimal GDP-Slot', info: 'Spart 25 Min', details: 'Audit-optimiert', status: 'recommended' },
-          { time: '11:00', truck: 'Klinische Studie', info: 'Spezialdokumentation', details: 'Rampe 3', status: 'busy' },
-          { time: '12:00', truck: 'Narkotika-Lieferung', info: 'BtM dokumentiert', details: 'Rampe 1 (Sicher)', status: 'busy' },
-          { time: '13:00', truck: 'Express Pharma', info: 'Spart 20 Min', details: 'GDP + schnell', status: 'recommended' }
+          { id: 'pharma-1', time: '08:00', truck: 'Vakzine Express', info: '2-8°C GDP', details: 'Rampe 1 (Validiert)', status: 'critical' },
+          { id: 'pharma-2', time: '09:00', truck: 'Routine Pharma', info: 'GDP-Dokumentiert', details: 'Rampe 2', status: 'busy' },
+          { id: 'pharma-3', time: '10:00', truck: 'Optimal GDP-Slot', info: 'Spart 25 Min', details: 'Audit-optimiert', status: 'recommended' },
+          { id: 'pharma-4', time: '11:00', truck: 'Klinische Studie', info: 'Spezialdokumentation', details: 'Rampe 3', status: 'busy' },
+          { id: 'pharma-5', time: '12:00', truck: 'Narkotika-Lieferung', info: 'BtM dokumentiert', details: 'Rampe 1 (Sicher)', status: 'busy' },
+          { id: 'pharma-6', time: '13:00', truck: 'Express Pharma', info: 'Spart 20 Min', details: 'GDP + schnell', status: 'recommended' }
         ],
         comparison: {
           before: [
@@ -165,35 +166,35 @@ export const categoryData: Record<string, CategoryInfo> = {
       }
     },
     benefits: [
-      { icon: '🎯', title: 'Automatische Optimierung', desc: 'Die KI optimiert automatisch alle Zeitfenster basierend auf Ihren Präferenzen und Constraints.' },
-      { icon: '📊', title: 'Live-Transparenz', desc: 'Sehen Sie in Echtzeit, welche Rampen belegt sind, wann Platz ist und wo Optimierungspotenzial liegt.' },
-      { icon: '💰', title: 'Messbare Einsparungen', desc: 'Durchschnittlich €20.400/Monat – wir zeigen Ihnen VOR dem Start, was Sie sparen werden.' },
-      { icon: '🔌', title: 'Einfache Integration', desc: 'Verbindet sich mit Ihrem WMS, TMS und ERP. Keine Prozessänderungen notwendig.' }
+      { icon: '🎯', title: 'dashboard:benefits.logistics.autoOptTitle', desc: 'dashboard:benefits.logistics.autoOptDesc' },
+      { icon: '📊', title: 'dashboard:benefits.logistics.transparencyTitle', desc: 'dashboard:benefits.logistics.transparencyDesc' },
+      { icon: '💰', title: 'dashboard:benefits.logistics.savingsTitle', desc: 'dashboard:benefits.logistics.savingsDesc' },
+      { icon: '🔌', title: 'dashboard:benefits.logistics.integrationTitle', desc: 'dashboard:benefits.logistics.integrationDesc' }
     ]
   },
   carrier: {
-    name: 'Speditionen',
+    name: 'common:categories.carrier',
     icon: '🚛',
     industries: {
-      ftl: 'Komplettladung (FTL)',
-      ltl: 'Teilladung (LTL)',
-      express: 'Express & KEP'
+      ftl: 'common:industries.ftl',
+      ltl: 'common:industries.ltl',
+      express: 'common:industries.express'
     },
     data: {
       ftl: {
         stats: [
           { icon: '🚛', label: 'Gebuchte Slots heute', value: '18', trend: 'Alle bestätigt', class: 'info' },
-          { icon: '⏱️', label: 'Ø Wartezeit', value: '12 Min', trend: '↘ -52% vs. ohne Buchung', class: 'success' },
+          { icon: '⏱️', label: 'dashboard:stats.avgWaitTime', value: '12 Min', trend: '↘ -52% vs. ohne Buchung', class: 'success' },
           { icon: '📍', label: 'Stops/Tag (Ø)', value: '15', trend: '↗ +3 mehr möglich', class: 'success' },
-          { icon: '💰', label: 'Einsparung/Monat', value: '€9.2k', trend: '↗ Kraftstoff + Zeit', class: 'success' }
+          { icon: '💰', label: 'dashboard:stats.monthlySavings', value: '€9.2k', trend: '↗ Kraftstoff + Zeit', class: 'success' }
         ],
         slots: [
-          { time: '08:00', truck: 'Depot München', info: 'Slot gebucht', details: 'Rampe 2', status: 'busy', location: 'München' },
-          { time: '10:00', truck: 'Depot Stuttgart', info: 'Slot gebucht', details: 'Rampe 1', status: 'busy', location: 'Stuttgart' },
-          { time: '12:00', truck: 'Optimal-Slot', info: 'Spart 25 Min', details: 'Route optimiert', status: 'recommended', location: 'Nürnberg' },
-          { time: '14:00', truck: 'Verfügbar', info: 'Jetzt buchen', details: 'Rampe frei', status: 'free', location: 'Frankfurt' },
-          { time: '15:00', truck: 'Optimal für Route', info: 'Spart 18 Min', details: 'Empfohlen', status: 'recommended', location: 'Köln' },
-          { time: '17:00', truck: 'Express-Slot', info: 'Fast Lane', details: 'Premium', status: 'busy', location: 'Hamburg' }
+          { id: 'sped-4-1', time: '08:00', truck: 'Depot München', info: 'Slot gebucht', details: 'Rampe 2', status: 'busy', location: 'München' },
+          { id: 'sped-4-2', time: '10:00', truck: 'Depot Stuttgart', info: 'Slot gebucht', details: 'Rampe 1', status: 'busy', location: 'Stuttgart' },
+          { id: 'sped-4-3', time: '12:00', truck: 'Optimal-Slot', info: 'Spart 25 Min', details: 'Route optimiert', status: 'recommended', location: 'Nürnberg' },
+          { id: 'sped-4-4', time: '14:00', truck: 'Verfügbar', info: 'Jetzt buchen', details: 'Rampe frei', status: 'free', location: 'Frankfurt' },
+          { id: 'sped-4-5', time: '15:00', truck: 'Optimal für Route', info: 'Spart 18 Min', details: 'Empfohlen', status: 'recommended', location: 'Köln' },
+          { id: 'sped-4-6', time: '17:00', truck: 'Express-Slot', info: 'Fast Lane', details: 'Premium', status: 'busy', location: 'Hamburg' }
         ],
         comparison: {
           before: [
@@ -211,16 +212,16 @@ export const categoryData: Record<string, CategoryInfo> = {
       ltl: {
         stats: [
           { icon: '📦', label: 'Teilladungen heute', value: '24', trend: 'Multi-Stop', class: 'info' },
-          { icon: '⏱️', label: 'Ø Wartezeit', value: '15 Min', trend: '↘ -48%', class: 'success' },
+          { icon: '⏱️', label: 'dashboard:stats.avgWaitTime', value: '15 Min', trend: '↘ -48%', class: 'success' },
           { icon: '🗺️', label: 'km gespart/Tag', value: '45', trend: 'Route optimiert', class: 'success' },
-          { icon: '💰', label: 'Einsparung/Monat', value: '€7.8k', trend: '↗ Effizienz', class: 'success' }
+          { icon: '💰', label: 'dashboard:stats.monthlySavings', value: '€7.8k', trend: '↗ Effizienz', class: 'success' }
         ],
         slots: [
-          { time: '07:00', truck: 'Multi-Stop Route A', info: '5 Stops', details: 'Optimal geplant', status: 'busy' },
-          { time: '09:00', truck: 'Multi-Stop Route B', info: '4 Stops', details: 'Route optimiert', status: 'busy' },
-          { time: '11:00', truck: 'Optimal LTL', info: 'Spart 22 Min', details: 'Multi-Stop', status: 'recommended' },
-          { time: '13:00', truck: 'Verfügbar', info: 'Slot frei', details: 'Flexible Buchung', status: 'free' },
-          { time: '15:00', truck: 'Nachmittags-Route', info: 'Spart 15 Min', details: 'Empfohlen', status: 'recommended' }
+          { id: 'ltl-1', time: '07:00', truck: 'Multi-Stop Route A', info: '5 Stops', details: 'Optimal geplant', status: 'busy' },
+          { id: 'ltl-2', time: '09:00', truck: 'Multi-Stop Route B', info: '4 Stops', details: 'Route optimiert', status: 'busy' },
+          { id: 'ltl-3', time: '11:00', truck: 'Optimal LTL', info: 'Spart 22 Min', details: 'Multi-Stop', status: 'recommended' },
+          { id: 'ltl-4', time: '13:00', truck: 'Verfügbar', info: 'Slot frei', details: 'Flexible Buchung', status: 'free' },
+          { id: 'ltl-5', time: '15:00', truck: 'Nachmittags-Route', info: 'Optimal', details: 'Spart 15 Min', status: 'recommended' }
         ],
         comparison: {
           before: [
@@ -238,17 +239,17 @@ export const categoryData: Record<string, CategoryInfo> = {
       express: {
         stats: [
           { icon: '⚡', label: 'Express-Lieferungen', value: '42', trend: 'Priorität', class: 'info' },
-          { icon: '⏱️', label: 'Ø Wartezeit', value: '8 Min', trend: '↘ -65%', class: 'success' },
+          { icon: '⏱️', label: 'dashboard:stats.avgWaitTime', value: '8 Min', trend: '↘ -65%', class: 'success' },
           { icon: '🎯', label: 'Pünktlichkeit', value: '96%', trend: '↗ Garantiert', class: 'success' },
-          { icon: '💰', label: 'Einsparung/Monat', value: '€11.2k', trend: '↗ Premium', class: 'success' }
+          { icon: '💰', label: 'dashboard:stats.monthlySavings', value: '€11.2k', trend: '↗ Premium', class: 'success' }
         ],
         slots: [
-          { time: '06:00', truck: 'Early Express', info: 'Priorität 1', details: 'Fast Lane', status: 'critical' },
-          { time: '08:00', truck: 'Morning Express', info: 'Priorität 2', details: 'Schnellabfertigung', status: 'busy' },
-          { time: '10:00', truck: 'Optimal Express', info: 'Spart 30 Min', details: 'Premium Slot', status: 'recommended' },
-          { time: '12:00', truck: 'Midday Express', info: 'Fast Lane', details: 'Rampe reserviert', status: 'busy' },
-          { time: '14:00', truck: 'Verfügbar', info: 'Express-Slot', details: 'Jetzt buchen', status: 'free' },
-          { time: '16:00', truck: 'Late Express', info: 'Spart 25 Min', details: 'Empfohlen', status: 'recommended' }
+          { id: 'exp-1', time: '06:00', truck: 'Early Express', info: 'Priorität 1', details: 'Fast Lane', status: 'critical' },
+          { id: 'exp-2', time: '08:00', truck: 'Morning Express', info: 'Priorität 2', details: 'Schnellabfertigung', status: 'busy' },
+          { id: 'exp-3', time: '10:00', truck: 'Optimal Express', info: 'Spart 30 Min', details: 'Premium Slot', status: 'recommended' },
+          { id: 'exp-4', time: '12:00', truck: 'Midday Express', info: 'Fast Lane', details: 'Rampe reserviert', status: 'busy' },
+          { id: 'exp-5', time: '14:00', truck: 'Verfügbar', info: 'Express-Slot', details: 'Jetzt buchen', status: 'free' },
+          { id: 'exp-6', time: '16:00', truck: 'Late Express', info: 'Spart 25 Min', details: 'Empfohlen', status: 'recommended' }
         ],
         comparison: {
           before: [
@@ -265,19 +266,19 @@ export const categoryData: Record<string, CategoryInfo> = {
       }
     },
     benefits: [
-      { icon: '📅', title: 'Garantierte Zeitfenster', desc: 'Buchen Sie Slots im Voraus – keine Wartezeiten mehr an der Rampe, planbare Routen.' },
-      { icon: '🗺️', title: 'Bessere Tourenplanung', desc: 'Das System zeigt, welche Zeitfenster optimal zu Ihrer Route passen – spart Kilometer.' },
-      { icon: '⏱️', title: 'Mehr Lieferungen/Tag', desc: 'Weniger Wartezeit = mehr Stops = mehr Umsatz. Durchschnittlich 3 zusätzliche Stops/Tag.' },
-      { icon: '📱', title: 'Mobile App für Fahrer', desc: 'Alle gebuchten Zeitfenster, Routen und Änderungen in Echtzeit auf dem Smartphone.' }
+      { icon: '📅', title: 'dashboard:benefits.carrier.slotsTitle', desc: 'dashboard:benefits.carrier.slotsDesc' },
+      { icon: '🗺️', title: 'dashboard:benefits.carrier.routingTitle', desc: 'dashboard:benefits.carrier.routingDesc' },
+      { icon: '⏱️', title: 'dashboard:benefits.carrier.throughputTitle', desc: 'dashboard:benefits.carrier.throughputDesc' },
+      { icon: '📱', title: 'dashboard:benefits.carrier.mobileTitle', desc: 'dashboard:benefits.carrier.mobileDesc' }
     ]
   },
   healthcare: {
-    name: 'Gesundheitswesen',
+    name: 'common:categories.healthcare',
     icon: '🏥',
     industries: {
-      hospital: 'Krankenhaus',
-      pharmacy: 'Apotheken-Logistik',
-      medical: 'Medizintechnik'
+      hospital: 'common:industries.hospital',
+      pharmacy: 'common:industries.pharmacy',
+      medical: 'common:industries.medical'
     },
     data: {
       hospital: {
@@ -285,15 +286,15 @@ export const categoryData: Record<string, CategoryInfo> = {
           { icon: '🔴', label: 'Kritische Lieferungen', value: '3', trend: 'Alle pünktlich', class: 'warning' },
           { icon: '🧊', label: 'Kühlketten-Konformität', value: '100%', trend: 'GDP-compliant', class: 'success' },
           { icon: '⏱️', label: 'Ø Wartezeit Pharma', value: '8 Min', trend: '↘ -72% vs. Standard', class: 'success' },
-          { icon: '💰', label: 'Einsparung/Monat', value: '€8.2k', trend: '↗ Verfall verhindert', class: 'success' }
+          { icon: '💰', label: 'dashboard:stats.monthlySavings', value: '€8.2k', trend: '↗ Verfall verhindert', class: 'success' }
         ],
         slots: [
-          { time: '08:00', truck: 'Notfall-Blutkonserven', info: '🔴 KRITISCH', details: 'Rampe 1 (Kühl)', status: 'critical' },
-          { time: '09:00', truck: 'Routine Pharma', info: 'GDP-Dokumentiert', details: '2-8°C Kühlkette', status: 'busy' },
-          { time: '10:00', truck: 'Express optimal', info: 'Kühlrampe frei', details: 'Spart 27 Min', status: 'recommended' },
-          { time: '11:00', truck: 'Chemo Patient Müller', info: '🔴 KRITISCH', details: 'OP 13:00 Uhr!', status: 'critical' },
-          { time: '12:00', truck: 'Sterilgut', info: 'Hygiene-Zone', details: 'Rampe 3 (Clean)', status: 'busy' },
-          { time: '13:00', truck: 'Optimal Pharma', info: 'GDP-konform', details: 'Spart 18 Min', status: 'recommended' }
+          { id: 'hos-1', time: '08:00', truck: 'Notfall-Blutkonserven', info: '🔴 KRITISCH', details: 'Rampe 1 (Kühl)', status: 'critical' },
+          { id: 'hos-2', time: '09:00', truck: 'Routine Pharma', info: 'GDP-Dokumentiert', details: '2-8°C Kühlkette', status: 'busy' },
+          { id: 'hos-3', time: '10:00', truck: 'Express optimal', info: 'Kühlrampe frei', details: 'Spart 27 Min', status: 'recommended' },
+          { id: 'hos-4', time: '11:00', truck: 'Chemo Patient Müller', info: '🔴 KRITISCH', details: 'OP 13:00 Uhr!', status: 'critical' },
+          { id: 'hos-5', time: '12:00', truck: 'Sterilgut', info: 'Hygiene-Zone', details: 'Rampe 3 (Clean)', status: 'busy' },
+          { id: 'hos-6', time: '13:00', truck: 'Optimal Pharma', info: 'GDP-konform', details: 'Spart 18 Min', status: 'recommended' }
         ],
         comparison: {
           before: [
@@ -312,16 +313,16 @@ export const categoryData: Record<string, CategoryInfo> = {
         stats: [
           { icon: '💊', label: 'Pharma-Lieferungen', value: '34', trend: '100% GDP', class: 'info' },
           { icon: '🧊', label: 'Kühlware', value: '18', trend: 'Alle konform', class: 'success' },
-          { icon: '⏱️', label: 'Ø Wartezeit', value: '10 Min', trend: '↘ -65%', class: 'success' },
-          { icon: '💰', label: 'Einsparung/Monat', value: '€6.8k', trend: '↗ Optimiert', class: 'success' }
+          { icon: '⏱️', label: 'dashboard:stats.avgWaitTime', value: '10 Min', trend: '↘ -65%', class: 'success' },
+          { icon: '💰', label: 'dashboard:stats.monthlySavings', value: '€6.8k', trend: '↗ Optimiert', class: 'success' }
         ],
         slots: [
-          { time: '08:00', truck: 'Apotheken-Express', info: 'Mehrere Stops', details: 'Route optimiert', status: 'busy' },
-          { time: '09:00', truck: 'Kühlware Pharma', info: '2-8°C', details: 'Rampe 1 (Kühl)', status: 'busy' },
-          { time: '10:00', truck: 'Optimal Express', info: 'Spart 22 Min', details: 'Multi-Stop Route', status: 'recommended' },
-          { time: '11:00', truck: 'Standard OTC', info: 'Over-the-Counter', details: 'Rampe 3', status: 'busy' },
-          { time: '12:00', truck: 'Verfügbar', info: 'Flexibel', details: 'Alle Rampen frei', status: 'free' },
-          { time: '13:00', truck: 'Nachmittags-Route', info: 'Optimal', details: 'Spart 15 Min', status: 'recommended' }
+          { id: 'phar-1', time: '08:00', truck: 'Apotheken-Express', info: 'Mehrere Stops', details: 'Route optimiert', status: 'busy' },
+          { id: 'phar-2', time: '09:00', truck: 'Kühlware Pharma', info: '2-8°C', details: 'Rampe 1 (Kühl)', status: 'busy' },
+          { id: 'phar-3', time: '10:00', truck: 'Optimal Express', info: 'Spart 22 Min', details: 'Multi-Stop Route', status: 'recommended' },
+          { id: 'phar-4', time: '11:00', truck: 'Standard OTC', info: 'Over-the-Counter', details: 'Rampe 3', status: 'busy' },
+          { id: 'phar-5', time: '12:00', truck: 'Verfügbar', info: 'Flexibel', details: 'Alle Rampen frei', status: 'free' },
+          { id: 'phar-6', time: '13:00', truck: 'Nachmittags-Route', info: 'Optimal', details: 'Spart 15 Min', status: 'recommended' }
         ],
         comparison: {
           before: [
@@ -340,16 +341,16 @@ export const categoryData: Record<string, CategoryInfo> = {
         stats: [
           { icon: '🔬', label: 'Medizintechnik', value: '22', trend: 'Spezialtransport', class: 'info' },
           { icon: '📦', label: 'Sterilgut', value: '15', trend: 'Hygiene-konform', class: 'success' },
-          { icon: '⏱️', label: 'Ø Wartezeit', value: '12 Min', trend: '↘ -58%', class: 'success' },
-          { icon: '💰', label: 'Einsparung/Monat', value: '€7.4k', trend: '↗ Optimiert', class: 'success' }
+          { icon: '⏱️', label: 'dashboard:stats.avgWaitTime', value: '12 Min', trend: '↘ -58%', class: 'success' },
+          { icon: '💰', label: 'dashboard:stats.monthlySavings', value: '€7.4k', trend: '↗ Optimiert', class: 'success' }
         ],
         slots: [
-          { time: '08:00', truck: 'OP-Instrumente', info: 'Steril', details: 'Clean Room Rampe', status: 'busy' },
-          { time: '09:00', truck: 'Dialyse-Zubehör', info: 'Zeitkritisch', details: 'Rampe 2', status: 'busy' },
-          { time: '10:00', truck: 'Optimal Medizin', info: 'Spart 25 Min', details: 'Hygiene optimal', status: 'recommended' },
-          { time: '11:00', truck: 'Imaging Equipment', info: 'Schwertransport', details: 'Spezialrampe', status: 'busy' },
-          { time: '12:00', truck: 'Labor-Supplies', info: 'Standard', details: 'Rampe 4', status: 'busy' },
-          { time: '13:00', truck: 'Express Medical', info: 'Optimal', details: 'Spart 16 Min', status: 'recommended' }
+          { id: 'med-1', time: '08:00', truck: 'OP-Instrumente', info: 'Steril', details: 'Clean Room Rampe', status: 'busy' },
+          { id: 'med-2', time: '09:00', truck: 'Dialyse-Zubehör', info: 'Zeitkritisch', details: 'Rampe 2', status: 'busy' },
+          { id: 'med-3', time: '10:00', truck: 'Optimal Medizin', info: 'Spart 25 Min', details: 'Hygiene optimal', status: 'recommended' },
+          { id: 'med-4', time: '11:00', truck: 'Imaging Equipment', info: 'Schwertransport', details: 'Spezialrampe', status: 'busy' },
+          { id: 'med-5', time: '12:00', truck: 'Labor-Supplies', info: 'Standard', details: 'Rampe 4', status: 'busy' },
+          { id: 'med-6', time: '13:00', truck: 'Express Medical', info: 'Optimal', details: 'Spart 16 Min', status: 'recommended' }
         ],
         comparison: {
           before: [
@@ -367,22 +368,22 @@ export const categoryData: Record<string, CategoryInfo> = {
     },
     benefits: {
       hospital: [
-        { icon: '🎯', title: 'Prioritäts-Management', desc: 'Kritische Lieferungen wie Notfall-Medikamente und Blutkonserven werden automatisch priorisiert.' },
-        { icon: '🧊', title: 'Kühlketten-Überwachung', desc: 'Automatische Zuordnung zu temperaturgeführten Rampen mit lückenloser Dokumentation.' },
-        { icon: '📋', title: 'GDP-Compliance', desc: 'Automatische Dokumentation für Pharma-Audits – Temperaturlogs, Zeitstempel, Abweichungen.' },
-        { icon: '💰', title: 'Verfall-Prävention', desc: 'Verhindert verdorbene Ware durch optimale Kühlketten-Planung – spart €4.200/Monat.' }
+        { icon: '🎯', title: 'dashboard:benefits.hospital.prioTitle', desc: 'dashboard:benefits.hospital.prioDesc' },
+        { icon: '🧊', title: 'dashboard:benefits.hospital.coldChainTitle', desc: 'dashboard:benefits.hospital.coldChainDesc' },
+        { icon: '📋', title: 'dashboard:benefits.hospital.gdpTitle', desc: 'dashboard:benefits.hospital.gdpDesc' },
+        { icon: '💰', title: 'dashboard:benefits.hospital.wasteTitle', desc: 'dashboard:benefits.hospital.wasteDesc' }
       ],
       pharmacy: [
-        { icon: '💊', title: 'Apotheken-Routing', desc: 'Optimierte Multi-Stop-Routen für Apotheken-Belieferung – minimiert Gesamtfahrzeit.' },
-        { icon: '🧊', title: 'Kühlware-Priorisierung', desc: 'Temperaturgeführte Ware wird automatisch bevorzugt behandelt.' },
-        { icon: '📋', title: 'GDP-Dokumentation', desc: 'Lückenlose Nachverfolgung aller Pharma-Lieferungen für Audits.' },
-        { icon: '💰', title: 'Route-Optimierung', desc: 'Spart durchschnittlich 35 km pro Tag durch bessere Planung.' }
+        { icon: '💊', title: 'dashboard:benefits.pharmacy.routingTitle', desc: 'dashboard:benefits.pharmacy.routingDesc' },
+        { icon: '🧊', title: 'dashboard:benefits.pharmacy.coldChainTitle', desc: 'dashboard:benefits.pharmacy.coldChainDesc' },
+        { icon: '📋', title: 'dashboard:benefits.pharmacy.gdpTitle', desc: 'dashboard:benefits.pharmacy.gdpDesc' },
+        { icon: '💰', title: 'dashboard:benefits.pharmacy.savingsTitle', desc: 'dashboard:benefits.pharmacy.savingsDesc' }
       ],
       medical: [
-        { icon: '🔬', title: 'Sterilgut-Handling', desc: 'Dedizierte Clean Room Rampen für sterile Medizinprodukte.' },
-        { icon: '📦', title: 'Spezialtransport', desc: 'Automatische Zuordnung für Schwertransporte und empfindliche Geräte.' },
-        { icon: '🧹', title: 'Hygiene-Compliance', desc: 'Automatische Reinigungs-Slots und Hygiene-Dokumentation.' },
-        { icon: '💰', title: 'Equipment-Schutz', desc: 'Minimiert Wartezeiten für teure Medizintechnik – spart €7.4k/Monat.' }
+        { icon: '🔬', title: 'dashboard:benefits.medical.sterileTitle', desc: 'dashboard:benefits.medical.sterileDesc' },
+        { icon: '📦', title: 'dashboard:benefits.medical.specialTitle', desc: 'dashboard:benefits.medical.specialDesc' },
+        { icon: '🧹', title: 'dashboard:benefits.medical.hygieneTitle', desc: 'dashboard:benefits.medical.hygieneDesc' },
+        { icon: '💰', title: 'dashboard:benefits.medical.protectionTitle', desc: 'dashboard:benefits.medical.protectionDesc' }
       ]
     }
   }
@@ -390,15 +391,15 @@ export const categoryData: Record<string, CategoryInfo> = {
 
 export const greenData = {
   stats: [
-    { icon: '🌍', value: '2.8t', label: 'CO₂ eingespart/Monat' },
-    { icon: '🌳', value: '140', label: 'Bäume gepflanzt (Äquiv.)' },
-    { icon: '⚡', value: '-81%', label: 'Leerlauf-Emissionen' },
-    { icon: '♻️', value: '15%', label: 'Weniger Leerfahrten' }
+    { icon: '🌍', value: '2.8t', label: 'dashboard:green.co2Saved' },
+    { icon: '🌳', value: '140', label: 'dashboard:green.treesPlanted' },
+    { icon: '⚡', value: '-81%', label: 'dashboard:green.idleEmissions' },
+    { icon: '♻️', value: '15%', label: 'dashboard:green.lessEmpty' }
   ],
   benefits: [
-    { icon: '📊', title: 'CO₂-Tracking & Reporting', desc: 'Automatische Berechnung des CO₂-Fußabdrucks pro Lieferung mit CSRD-konformen Reports.' },
-    { icon: '⏱️', title: 'Idle Time Reduction', desc: 'Minimiert Leerlauf-Emissionen um 81% durch optimale Zeitfenster-Planung.' },
-    { icon: '🗺️', title: 'Route Optimization', desc: 'Intelligente Routenvorschläge sparen durchschnittlich 17km und 4kg CO₂ pro Lieferung.' },
-    { icon: '💰', title: 'CO₂-Preis-Einsparung', desc: 'Bei €100/Tonne CO₂ = €280/Monat gespart. Tendenz steigend.' }
+    { icon: '📊', title: 'dashboard:green.trackingTitle', desc: 'dashboard:green.trackingDesc' },
+    { icon: '⏱️', title: 'dashboard:green.idleTitle', desc: 'dashboard:green.idleDesc' },
+    { icon: '🗺️', title: 'dashboard:green.routingTitle', desc: 'dashboard:green.routingDesc' },
+    { icon: '💰', title: 'dashboard:green.priceTitle', desc: 'dashboard:green.priceDesc' }
   ]
 };

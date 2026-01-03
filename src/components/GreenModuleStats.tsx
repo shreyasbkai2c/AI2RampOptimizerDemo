@@ -1,27 +1,39 @@
+import { cn } from "@/lib/utils"
+import { useTranslation } from "react-i18next"
+
 interface GreenModuleStatsProps {
-  stats: { icon: string; value: string; label: string }[];
+  stats: { icon: string; value: string; label: string }[]
 }
 
 export function GreenModuleStats({ stats }: GreenModuleStatsProps) {
+  const { t } = useTranslation(["dashboard"])
+
   return (
-    <div className="bg-muted p-6 md:p-8 rounded-2xl mb-8">
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="text-xl md:text-2xl font-semibold text-foreground flex items-center gap-3">
-          🌱 Nachhaltigkeits-Impact
-        </h2>
-      </div>
-      
-      <div className="gradient-success p-6 rounded-xl">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {stats.map((stat, index) => (
-            <div key={index} className="text-center">
-              <div className="text-4xl mb-3">{stat.icon}</div>
-              <div className="text-3xl font-bold text-success mb-1">{stat.value}</div>
-              <div className="text-sm text-success/80 font-medium">{stat.label}</div>
+    <div className="space-y-6">
+      <h2 className="text-lg font-semibold tracking-tight text-foreground md:text-xl">
+        🌱 {t("dashboard:greenModule")}
+      </h2>
+
+      <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
+        {stats.map((stat, index) => {
+          const displayLabel = stat.label.includes(":") ? t(stat.label as any) : stat.label
+          return (
+            <div key={index} className="flex flex-col items-center text-center space-y-2 group">
+              <div className="text-4xl transition-transform duration-300 group-hover:scale-110" role="img" aria-label={displayLabel}>
+                {stat.icon}
+              </div>
+              <div className="space-y-1">
+                <p className="text-2xl font-bold tracking-tight text-success md:text-3xl">
+                  {stat.value}
+                </p>
+                <p className="text-xs font-medium text-success/60 uppercase tracking-widest">
+                  {displayLabel}
+                </p>
+              </div>
             </div>
-          ))}
-        </div>
+          )
+        })}
       </div>
     </div>
-  );
+  )
 }

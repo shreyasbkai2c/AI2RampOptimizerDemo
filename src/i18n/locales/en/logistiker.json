@@ -1,0 +1,59 @@
+{
+    "scenario": {
+        "title": "Select Scenario",
+        "standard": {
+            "name": "Standard Operations",
+            "desc": "Balanced ratio between punctuality and cost."
+        },
+        "peak": {
+            "name": "Peak Season",
+            "desc": "Maximum utilization and high risk of delays."
+        },
+        "green": {
+            "name": "Green Logistics",
+            "desc": "Focus on CO2 reduction and idle time minimization."
+        }
+    },
+    "volumeLevel": {
+        "low": "Low",
+        "normal": "Normal",
+        "peak": "Peak"
+    },
+    "staffingLevel": {
+        "low": "Understaffed",
+        "normal": "Normal",
+        "high": "Fully Staffed"
+    },
+    "rampAvailability": {
+        "all": "All ramps available",
+        "oneDown": "1 ramp unavailable",
+        "twoDown": "2 ramps unavailable"
+    },
+    "priorityPressure": {
+        "low": "Low",
+        "medium": "Medium",
+        "high": "High"
+    },
+    "events": {
+        "truckLate": "Arrival delayed: Truck from {{carrier}} delayed by {{delayMin}} min.",
+        "dockBlocked": "Bottleneck: Dock {{rampId}} blocked by unloading process.",
+        "tempRisk": "Temperature Warning: Cold chain for shipment #{{shipmentId}} at risk."
+    },
+    "recommendations": {
+        "reschedule": {
+            "label": "Reschedule Slot",
+            "desc": "Move {{truck}} to {{time}} to avoid congestion.",
+            "impact": "Saves {{waitTime}} min wait time"
+        },
+        "priority": {
+            "label": "Priority Handling",
+            "desc": "Prioritize {{truck}} to prevent SLA violation.",
+            "impact": "Avoids €{{penalty}} penalty"
+        },
+        "staffUp": {
+            "label": "Increase Staffing",
+            "desc": "Request additional team at dock {{rampId}}.",
+            "impact": "+{{throughput}}% throughput"
+        }
+    }
+}
