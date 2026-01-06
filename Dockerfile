@@ -1,6 +1,7 @@
 # ---- Build stage ----
 FROM node:20-alpine AS build
 WORKDIR /app
+ARG CAPROVER_GIT_COMMIT_SHA
 
 # install deps
 COPY package*.json ./
