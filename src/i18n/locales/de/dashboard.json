@@ -259,7 +259,7 @@
         }
     },
     "decisionFeed": {
-        "liveEvents": "operativer Live-Feed",
+        "liveEvents": "Operational Live Feed",
         "waitingForEvents": "Warte auf Ereignisse...",
         "aiSupport": "KI gestützte Entscheidungshilfe",
         "systemOptimized": "System optimiert. Keine sofortigen Aktionen nötig.",
@@ -574,5 +574,47 @@
         "12PerMon": "12/Mon",
         "0PerMon": "0/Mon",
         "0PerYear": "0/Jahr"
+    },
+    "infotip": {
+        "simulation": {
+            "title": "Simulation Controls & Store",
+            "points": [
+                "Wählen Sie ein Szenario (Auslastung, Rampen, Priorität, Personal).",
+                "Dies erzeugt ein realistisches Logistikszenario basierend auf Ihrer Auswahl.",
+                "Drücken Sie Start, um die Zeit schrittweise vorlaufen zu lassen."
+            ]
+        },
+        "timeline": {
+            "title": "Operational Live Feed (Timeline/Table)",
+            "points": [
+                "Zeigt den heute simulierten Rampenplan.",
+                "Aktualisiert sich automatisch während die Zeit läuft.",
+                "Rote Markierungen für kritische Verzögerungen, grün für KI-Vorschläge."
+            ]
+        },
+        "decisions": {
+            "title": "AI Decisions (Recommendations & Reasoning)",
+            "points": [
+                "Erkennt Engpässe und Störungen frühzeitig.",
+                "Schlägt eine klare Maßnahme zur Behebung vor.",
+                "Erklärt, warum die Maßnahme hilft."
+            ]
+        },
+        "roi": {
+            "title": "ROI Calculator (Value & Savings)",
+            "points": [
+                "Übersetzt Verbesserungen in €-Einsparungen.",
+                "Vergleicht manuell vs. KI im selben Szenario.",
+                "Aktualisiert sich, wenn sich der Plan ändert."
+            ]
+        },
+        "sustainability": {
+            "title": "Nachhaltigkeits-Features",
+            "points": [
+                "CO₂-Tracking pro Lieferung für CSRD-konforme Reports.",
+                "81% weniger Leerlauf-Emissionen durch optimierte Zeitfenster.",
+                "Routen-Optimierung spart durchschnittlich 17km pro Tour."
+            ]
+        }
     }
 }

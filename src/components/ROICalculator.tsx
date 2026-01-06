@@ -9,6 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Calculator, TrendingUp, Clock, ShieldCheck, Users } from "lucide-react"
 import { useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
+import { InfoTip } from "@/components/ui/InfoTip"
 
 export function ROICalculator() {
     const { roiResult, roiInputs, updateRoiInputs } = useSimulationStore()
@@ -25,11 +26,14 @@ export function ROICalculator() {
     return (
         <Card className="border-success/20 bg-success/5">
             <CardHeader className="pb-3">
-                <CardTitle className="text-sm font-bold flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                        <Calculator className="h-4 w-4 text-success" />
-                        {t("roi.title")}
-                    </div>
+                <CardTitle className="text-sm font-bold flex items-center gap-2">
+                    <Calculator className="h-4 w-4 text-success" />
+                    <span>{t("roi.title")}</span>
+                    <InfoTip
+                        title={t("dashboard:infotip.roi.title")}
+                        points={t("dashboard:infotip.roi.points", { returnObjects: true }) as string[]}
+                        className="ml-0"
+                    />
                 </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">

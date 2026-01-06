@@ -22,10 +22,12 @@ export function CTASection({ onCTAClick }: CTASectionProps) {
       <Button
         size="lg"
         onClick={onCTAClick}
-        className="rounded-xl px-8 font-semibold shadow-md transition-all hover:shadow-lg"
+        className="rounded-2xl px-12 py-7 text-lg font-bold shadow-xl transition-all hover:shadow-2xl hover:scale-105 bg-primary text-primary-foreground hover:bg-primary/90 border-2 border-primary/20 group"
       >
-        {t("dashboard:ctaSection.button")}
-        <ArrowRight className="ml-2 h-4 w-4" />
+        <span className="flex items-center gap-3">
+          {t("dashboard:ctaSection.button")}
+          <ArrowRight className="h-6 w-6 transition-transform group-hover:translate-x-1" />
+        </span>
       </Button>
     </div>
   )

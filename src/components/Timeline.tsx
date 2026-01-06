@@ -19,7 +19,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Button } from "@/components/ui/button"
-import { Search, RotateCcw, ChevronLeft, ChevronRight } from "lucide-react"
+import { Search, RotateCcw, ChevronLeft, ChevronRight, Calendar } from "lucide-react"
 import { translate } from "@/lib/i18n-utils"
 import { useTranslation } from "react-i18next"
 
@@ -30,6 +30,8 @@ interface TimelineProps {
 }
 
 const ITEMS_PER_PAGE = 5
+
+import { InfoTip } from "@/components/ui/InfoTip"
 
 export function Timeline({ slots, title, onSlotClick }: TimelineProps) {
   const [search, setSearch] = useState("")
@@ -78,18 +80,21 @@ export function Timeline({ slots, title, onSlotClick }: TimelineProps) {
       case "critical":
         return <Badge variant="destructive" className="animate-pulse">{t("dashboard:timeline.status.critical")}</Badge>
       case "busy":
-        return <Badge variant="secondary">{t("dashboard:timeline.status.busy")}</Badge>
+        return <Badge className="bg-yellow-500 text-white hover:bg-yellow-600">{t("dashboard:timeline.status.busy")}</Badge>
       default:
-        return <Badge variant="outline">{t("dashboard:timeline.status.free")}</Badge>
+        return <Badge className="bg-blue-500 text-white hover:bg-blue-600">{t("dashboard:timeline.status.free")}</Badge>
     }
   }
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <h2 className="text-lg font-semibold tracking-tight text-foreground md:text-xl">
-          📅 {title.includes(":") ? t(title as any) : title}
-        </h2>
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between px-2">
+        <div className="flex items-center gap-2">
+          <Calendar className="h-4 w-4 text-muted-foreground" />
+          <h3 className="text-sm font-bold text-foreground">
+            {title.includes(":") ? t(title as any) : title}
+          </h3>
+        </div>
         <div className="flex flex-wrap items-center gap-2">
           <div className="relative w-full sm:w-64">
             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
@@ -166,7 +171,7 @@ export function Timeline({ slots, title, onSlotClick }: TimelineProps) {
                       </TableCell>
                       <TableCell>{getStatusBadge(slot.status)}</TableCell>
                       <TableCell className="text-right">
-                        <Button variant="ghost" size="sm" className="rounded-lg">
+                        <Button variant="outline" size="sm" className="rounded-lg font-semibold border-primary/30 text-primary hover:bg-primary hover:text-white transition-all shadow-sm">
                           {t("dashboard:timeline.detailsButton")}
                         </Button>
                       </TableCell>

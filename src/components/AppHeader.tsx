@@ -21,6 +21,7 @@ interface AppHeaderProps {
   onIndustryChange: (industry: string) => void
   greenModuleEnabled: boolean
   onToggleGreenModule: () => void
+  onCTAClick?: () => void
   onBack: () => void
 }
 
@@ -32,6 +33,7 @@ export function AppHeader({
   onIndustryChange,
   greenModuleEnabled,
   onToggleGreenModule,
+  onCTAClick,
   onBack,
 }: AppHeaderProps) {
   const { t } = useTranslation(["common"])
@@ -91,11 +93,22 @@ export function AppHeader({
             🌱 {t("greenModule")}
           </Button>
 
+          {/* Potential Analysis Button */}
+          {onCTAClick && (
+            <Button
+              variant="default"
+              className="hidden lg:flex rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 font-bold shadow-md hover:shadow-lg transition-all"
+              onClick={onCTAClick}
+            >
+              🎯 {t("dashboard:cta.title")}
+            </Button>
+          )}
+
           {/* Language Toggle */}
           <LanguageToggle />
 
           {/* Back */}
-          <Button variant="outline" className="rounded-xl" onClick={onBack}>
+          <Button variant="outline" className="rounded-xl border-border/50" onClick={onBack}>
             {t("back")}
           </Button>
         </div>

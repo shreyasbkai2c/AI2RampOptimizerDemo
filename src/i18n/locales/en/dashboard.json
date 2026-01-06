@@ -163,7 +163,7 @@
         },
         "ctaFreeGuarantee": "The potential analysis is 100% free and non-binding.",
         "deliveries": {
-            "definition": "Definition (simple)",
+            "definition": "Definition",
             "definitionDesc": "“Number of inbound/outbound trucks simulated for today under the selected scenario.”",
             "breakdown": "Breakdown",
             "inboundLabel": "Inbound",
@@ -574,5 +574,47 @@
         "12PerMon": "12/Mon",
         "0PerMon": "0/Mon",
         "0PerYear": "0/Year"
+    },
+    "infotip": {
+        "simulation": {
+            "title": "Simulation Controls & Store",
+            "points": [
+                "Choose a scenario (load, ramps, priority, staffing).",
+                "This will generate a realistic logistic scenario based on your choices.",
+                "Press Start to run time forward in steps."
+            ]
+        },
+        "timeline": {
+            "title": "Operational Live Feed (Timeline/Table)",
+            "points": [
+                "Shows today’s simulated ramp plan.",
+                "Updates automatically as time runs.",
+                "Red highlights critical delays, green shows AI suggestions."
+            ]
+        },
+        "decisions": {
+            "title": "AI Decisions (Recommendations & Reasoning)",
+            "points": [
+                "Detects congestion and disruptions early.",
+                "Suggests a clear action to fix it.",
+                "Explains why the action helps."
+            ]
+        },
+        "roi": {
+            "title": "ROI Calculator (Value & Savings)",
+            "points": [
+                "Translates improvements into € savings.",
+                "Compares manual vs AI on the same scenario.",
+                "Updates when the plan changes."
+            ]
+        },
+        "sustainability": {
+            "title": "Sustainability Features",
+            "points": [
+                "CO₂ tracking per delivery for CSRD-compliant reports.",
+                "81% less idle emissions through optimized time slots.",
+                "Route optimization saves an average of 17km per tour."
+            ]
+        }
     }
 }

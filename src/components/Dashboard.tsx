@@ -199,6 +199,7 @@ export function Dashboard({ category, onBack }: DashboardProps) {
         }}
         greenModuleEnabled={greenModuleEnabled}
         onToggleGreenModule={() => setGreenModuleEnabled(!greenModuleEnabled)}
+        onCTAClick={handleCTAClick}
         onBack={onBack}
       />
 

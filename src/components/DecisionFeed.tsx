@@ -43,7 +43,12 @@ function EventFeed({ className }: { className?: string }) {
             <CardHeader className="py-3 px-4 border-b">
                 <CardTitle className="text-sm font-bold flex items-center gap-2">
                     <Zap className="h-4 w-4 text-orange-500" />
-                    {t("decisionFeed.liveEvents")}
+                    <span>{t("decisionFeed.liveEvents")}</span>
+                    <InfoTip
+                        title={t("dashboard:infotip.timeline.title")}
+                        points={t("dashboard:infotip.timeline.points", { returnObjects: true }) as string[]}
+                        className="ml-0"
+                    />
                 </CardTitle>
             </CardHeader>
             <CardContent className="p-0 flex-1 overflow-hidden">
@@ -90,6 +95,8 @@ function EventFeed({ className }: { className?: string }) {
 
 import { useToast } from "@/components/ui/use-toast"
 
+import { InfoTip } from "@/components/ui/InfoTip"
+
 function RecommendationFeed({ className, onRecClick }: { className?: string; onRecClick: (rec: Recommendation) => void }) {
     const { recommendations, applyRecommendation } = useSimulationStore()
     const { t } = useTranslation(["dashboard", "common"])
@@ -110,7 +117,12 @@ function RecommendationFeed({ className, onRecClick }: { className?: string; onR
             <CardHeader className="py-3 px-4 border-b">
                 <CardTitle className="text-sm font-bold flex items-center gap-2">
                     <Lightbulb className="h-4 w-4 text-yellow-500" />
-                    {t("decisionFeed.aiSupport")}
+                    <span>{t("decisionFeed.aiSupport")}</span>
+                    <InfoTip
+                        title={t("dashboard:infotip.decisions.title")}
+                        points={t("dashboard:infotip.decisions.points", { returnObjects: true }) as string[]}
+                        className="ml-0"
+                    />
                 </CardTitle>
             </CardHeader>
             <CardContent className="p-0 flex-1 overflow-hidden">

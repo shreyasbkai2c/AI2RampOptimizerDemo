@@ -20,9 +20,9 @@ export function ComparisonSection({ comparison }: ComparisonSectionProps) {
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         {/* Before */}
-        <Card className="border-destructive/20 bg-destructive/5">
+        <Card className="border-destructive/20 bg-destructive/5 transition-all duration-500 hover:shadow-lg hover:-translate-y-1 group">
           <CardHeader className="text-center pb-2">
-            <div className="flex justify-center mb-2">
+            <div className="flex justify-center mb-2 transition-transform duration-300 group-hover:scale-110">
               <XCircle className="h-8 w-8 text-destructive" />
             </div>
             <CardTitle className="text-lg font-bold text-foreground">
@@ -31,7 +31,7 @@ export function ComparisonSection({ comparison }: ComparisonSectionProps) {
           </CardHeader>
           <CardContent className="text-center space-y-6">
             {comparison.before.map((metric, index) => (
-              <div key={index} className="space-y-1">
+              <div key={index} className="space-y-1 transition-all duration-300 group-hover:px-2">
                 <p className="text-sm font-medium text-muted-foreground">
                   {t(metric.label as any)}
                 </p>
@@ -44,9 +44,14 @@ export function ComparisonSection({ comparison }: ComparisonSectionProps) {
         </Card>
 
         {/* After */}
-        <Card className="border-success/20 bg-success/5">
+        <Card className="border-success/20 bg-success/5 transition-all duration-500 hover:shadow-lg hover:-translate-y-1 group relative overflow-hidden">
+          <div className="absolute top-0 right-0 p-2 overflow-hidden pointer-events-none">
+            <div className="bg-success text-white text-[10px] font-bold px-8 py-1 rotate-45 translate-x-3 -translate-y-1 shadow-sm">
+              AI OPTIMIZED
+            </div>
+          </div>
           <CardHeader className="text-center pb-2">
-            <div className="flex justify-center mb-2">
+            <div className="flex justify-center mb-2 transition-transform duration-300 group-hover:scale-110">
               <CheckCircle2 className="h-8 w-8 text-success" />
             </div>
             <CardTitle className="text-lg font-bold text-foreground">
@@ -55,7 +60,7 @@ export function ComparisonSection({ comparison }: ComparisonSectionProps) {
           </CardHeader>
           <CardContent className="text-center space-y-6">
             {comparison.after.map((metric, index) => (
-              <div key={index} className="space-y-1">
+              <div key={index} className="space-y-1 transition-all duration-300 group-hover:px-2">
                 <p className="text-sm font-medium text-muted-foreground">
                   {t(metric.label as any)}
                 </p>
@@ -63,7 +68,7 @@ export function ComparisonSection({ comparison }: ComparisonSectionProps) {
                   <p className="text-3xl font-bold tracking-tight text-success md:text-4xl">
                     {metric.value.includes(":") ? t(metric.value as any) : metric.value}
                   </p>
-                  <Badge className="bg-success text-success-foreground hover:bg-success/90">
+                  <Badge className="bg-success text-success-foreground hover:bg-success/90 animate-pulse">
                     {t("dashboard:comparison.optimalBadge")}
                   </Badge>
                 </div>
