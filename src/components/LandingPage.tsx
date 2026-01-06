@@ -24,8 +24,7 @@ export function LandingPage({ onSelectCategory }: LandingPageProps) {
       ],
       badges: [
         { text: "€20.4k/Monat", variant: "green" as const },
-        { text: "30% Effizienz", variant: "default" as const },
-        { text: "IFOY Award", variant: "default" as const },
+        { text: "30% Effizienz", variant: "default" as const }
       ],
     },
     {

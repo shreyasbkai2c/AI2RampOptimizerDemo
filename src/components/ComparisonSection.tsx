@@ -36,7 +36,7 @@ export function ComparisonSection({ comparison }: ComparisonSectionProps) {
                   {t(metric.label as any)}
                 </p>
                 <p className="text-3xl font-bold tracking-tight text-destructive md:text-4xl">
-                  {metric.value}
+                  {metric.value.includes(":") ? t(metric.value as any) : metric.value}
                 </p>
               </div>
             ))}
@@ -61,7 +61,7 @@ export function ComparisonSection({ comparison }: ComparisonSectionProps) {
                 </p>
                 <div className="flex items-center justify-center gap-2">
                   <p className="text-3xl font-bold tracking-tight text-success md:text-4xl">
-                    {metric.value}
+                    {metric.value.includes(":") ? t(metric.value as any) : metric.value}
                   </p>
                   <Badge className="bg-success text-success-foreground hover:bg-success/90">
                     {t("dashboard:comparison.optimalBadge")}

@@ -15,6 +15,11 @@ export function StatCard({ stat, onClick }: StatCardProps) {
     success: "border-l-success",
     warning: "border-l-warning",
   }
+  const bgHighlights = {
+    info: "hover:bg-info/5",
+    success: "hover:bg-success/5",
+    warning: "hover:bg-warning/5",
+  }
 
   // Determine if stat.label is a translation key or a raw string
   const displayLabel = stat.label.includes(":") ? t(stat.label as any) : stat.label
@@ -22,8 +27,9 @@ export function StatCard({ stat, onClick }: StatCardProps) {
   return (
     <Card
       className={cn(
-        "group cursor-pointer border-l-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-md",
-        borderColors[stat.class as keyof typeof borderColors] || "border-l-primary"
+        "group cursor-pointer border-l-4 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:scale-[1.01] active:scale-[0.98]",
+        borderColors[stat.class as keyof typeof borderColors] || "border-l-primary",
+        bgHighlights[stat.class as keyof typeof bgHighlights] || "hover:bg-accent/5"
       )}
       onClick={onClick}
     >
@@ -34,12 +40,12 @@ export function StatCard({ stat, onClick }: StatCardProps) {
               {stat.icon}
             </span>
             <span className="text-xs font-semibold text-success bg-success/10 px-2 py-0.5 rounded-full">
-              {stat.trend}
+              {stat.trend.includes(":") ? t(stat.trend as any) : stat.trend}
             </span>
           </div>
           <div>
             <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
-              {displayLabel as any}
+              {displayLabel}
             </p>
             <h3 className="text-2xl font-bold tracking-tight text-foreground md:text-3xl lg:text-4xl">
               {stat.value}

@@ -23,9 +23,13 @@ export type RoiResult = {
         totalSavingsEur: number
     }
     monthly: {
+        waitSavingsEur: number
+        slaSavingsEur: number
         totalSavingsEur: number
     }
     annual: {
+        waitSavingsEur: number
+        slaSavingsEur: number
         totalSavingsEur: number
     }
     assumptions: {
@@ -84,9 +88,13 @@ export function calculateROI(
             totalSavingsEur: Math.round(totalDailySavingsEur)
         },
         monthly: {
+            waitSavingsEur: Math.round(waitSavingsEur * workingDaysPerMonth),
+            slaSavingsEur: Math.round(slaSavingsEur * workingDaysPerMonth),
             totalSavingsEur: Math.round(monthlyTotal)
         },
         annual: {
+            waitSavingsEur: Math.round(waitSavingsEur * workingDaysPerMonth * 12),
+            slaSavingsEur: Math.round(slaSavingsEur * workingDaysPerMonth * 12),
             totalSavingsEur: Math.round(annualTotal)
         },
         assumptions: {

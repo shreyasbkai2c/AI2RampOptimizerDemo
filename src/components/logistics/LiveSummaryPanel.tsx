@@ -21,10 +21,10 @@ export function LiveSummaryPanel() {
             <div className="space-y-1">
                 <div className="flex items-center gap-1.5 text-muted-foreground text-xs font-semibold uppercase tracking-wider">
                     <AlertTriangle className="h-3.5 w-3.5" />
-                    {t("dashboard:simulation.expectedCongestion", "Congestion")}
+                    {t("dashboard:simulation.expectedCongestion")}
                 </div>
                 <div className={`font-bold text-lg ${congestionColor}`}>
-                    {derived.expectedCongestion}
+                    {t(`dashboard:simulation.congestionLevels.${derived.expectedCongestion}` as any)}
                 </div>
             </div>
 
@@ -32,7 +32,7 @@ export function LiveSummaryPanel() {
             <div className="space-y-1">
                 <div className="flex items-center gap-1.5 text-muted-foreground text-xs font-semibold uppercase tracking-wider">
                     <Clock className="h-3.5 w-3.5" />
-                    {t("dashboard:simulation.predictedWait", "Ø Wait Time")}
+                    {t("dashboard:simulation.predictedWait")}
                 </div>
                 <div className="flex items-baseline gap-2">
                     <span className="font-bold text-lg">{derived.predictedWaitAI} min</span>
@@ -46,10 +46,10 @@ export function LiveSummaryPanel() {
             <div className="space-y-1">
                 <div className="flex items-center gap-1.5 text-muted-foreground text-xs font-semibold uppercase tracking-wider">
                     <TrendingUp className="h-3.5 w-3.5" />
-                    {t("dashboard:simulation.projectedSavings", "Monthly Savings")}
+                    {t("dashboard:simulation.projectedSavings")}
                 </div>
                 <div className="font-bold text-lg text-emerald-600">
-                    €{(derived.projectedSavingsEur / 1000).toFixed(1)}k
+                    {Math.round(derived.projectedSavingsEur)}€
                 </div>
             </div>
 
@@ -57,7 +57,7 @@ export function LiveSummaryPanel() {
             <div className="space-y-1">
                 <div className="flex items-center gap-1.5 text-muted-foreground text-xs font-semibold uppercase tracking-wider">
                     <Leaf className="h-3.5 w-3.5" />
-                    {t("dashboard:simulation.projectedCO2", "CO₂ Reduction")}
+                    {t("dashboard:simulation.projectedCO2")}
                 </div>
                 {derived.projectedCO2Saved > 0 ? (
                     <div className="font-bold text-lg text-emerald-600">
@@ -66,7 +66,7 @@ export function LiveSummaryPanel() {
                 ) : (
                     <div className="text-xs text-muted-foreground py-1 flex items-center gap-1">
                         <Info className="h-3 w-3" />
-                        {t("dashboard:simulation.enableGreen", "Enable Green Module")}
+                        {t("dashboard:simulation.enableGreen")}
                     </div>
                 )}
             </div>

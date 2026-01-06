@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/select"
 import { Button } from "@/components/ui/button"
 import { Search, RotateCcw, ChevronLeft, ChevronRight } from "lucide-react"
+import { translate } from "@/lib/i18n-utils"
 import { useTranslation } from "react-i18next"
 
 interface TimelineProps {
@@ -38,16 +39,21 @@ export function Timeline({ slots, title, onSlotClick }: TimelineProps) {
 
   const filteredSlots = useMemo(() => {
     return slots.filter((slot) => {
+      const truck = translate(t, slot.truck)
+      const info = translate(t, slot.info)
+      const details = translate(t, slot.details)
+
       const matchesSearch =
-        slot.truck.toLowerCase().includes(search.toLowerCase()) ||
-        slot.info.toLowerCase().includes(search.toLowerCase()) ||
-        slot.location.toLowerCase().includes(search.toLowerCase())
+        truck.toLowerCase().includes(search.toLowerCase()) ||
+        info.toLowerCase().includes(search.toLowerCase()) ||
+        details.toLowerCase().includes(search.toLowerCase()) ||
+        (slot.location && slot.location.toLowerCase().includes(search.toLowerCase()))
 
       const matchesStatus = statusFilter === "all" || slot.status === statusFilter
 
       return matchesSearch && matchesStatus
     })
-  }, [slots, search, statusFilter])
+  }, [slots, search, statusFilter, t])
 
   // Reset pagination when filters change
   useEffect(() => {
@@ -142,14 +148,20 @@ export function Timeline({ slots, title, onSlotClick }: TimelineProps) {
                       <TableCell className="font-bold text-foreground">{slot.time}</TableCell>
                       <TableCell>
                         <div className="flex flex-col">
-                          <span className="font-medium text-foreground">{slot.truck}</span>
+                          <span className="font-medium text-foreground">
+                            {translate(t, slot.truck)}
+                          </span>
                           <span className="text-xs text-muted-foreground">{slot.location}</span>
                         </div>
                       </TableCell>
                       <TableCell className="hidden md:table-cell">
                         <div className="flex flex-col gap-0.5">
-                          <span className="text-sm text-foreground/90">{slot.info}</span>
-                          <span className="text-xs text-muted-foreground">{slot.details}</span>
+                          <span className="text-sm text-foreground/90">
+                            {translate(t, slot.info)}
+                          </span>
+                          <span className="text-xs text-muted-foreground">
+                            {translate(t, slot.details)}
+                          </span>
                         </div>
                       </TableCell>
                       <TableCell>{getStatusBadge(slot.status)}</TableCell>

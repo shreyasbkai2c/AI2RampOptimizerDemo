@@ -86,12 +86,12 @@ export function Dashboard({ category, onBack }: DashboardProps) {
     if (category !== "logistics") return data.data[activeIndustry].stats
 
     return [
-      { icon: '📦', label: 'dashboard:stats.deliveriesToday', value: simKpis.shipmentVolume.toString(), trend: t("dashboard:simulation.localSimulated"), class: 'info' as const },
-      { icon: '⚡', label: 'dashboard:stats.rampUtilization', value: `${Math.round(simKpis.rampUtilizationPct)}%`, trend: `↗ +${Math.round(simKpis.rampUtilizationPct - baselineKpis.rampUtilizationPct)}% ${t("dashboard:simulation.withAi")}`, class: 'success' as const },
-      { icon: '⏱️', label: 'dashboard:stats.avgWaitTime', value: `${simKpis.avgWaitMin} Min`, trend: `↘ -${Math.round((1 - simKpis.avgWaitMin / baselineKpis.avgWaitMin) * 100)}% ${t("dashboard:simulation.reduction")}`, class: 'success' as const },
-      { icon: '💰', label: 'dashboard:stats.monthlySavings', value: `€${(simKpis.monthlySavingsEur / 1000).toFixed(1)}k`, trend: `↗ ${t("dashboard:simulation.measurable")}`, class: 'success' as const }
+      { icon: '📦', label: 'dashboard:stats.deliveriesToday', value: simKpis.shipmentVolume.toString(), trend: t("dashboard:simulation.scenarioDrivenEstimate"), class: 'info' as const },
+      { icon: '⚡', label: 'dashboard:stats.rampUtilization', value: `${Math.round(simKpis.rampUtilizationPct)}%`, trend: `+${Math.round(simKpis.rampUtilizationPct - baselineKpis.rampUtilizationPct)}% ${t("dashboard:simulation.withAi")}`, class: 'success' as const },
+      { icon: '⏱️', label: 'dashboard:stats.avgWaitTime', value: `${simKpis.avgWaitMin} Min`, trend: `-${Math.round((1 - simKpis.avgWaitMin / baselineKpis.avgWaitMin) * 100)}% ${t("dashboard:simulation.reduction")}`, class: 'success' as const },
+      { icon: '💰', label: 'dashboard:stats.monthlySavings', value: `${Math.round(simKpis.monthlySavingsEur)}€`, trend: `${t("dashboard:simulation.measurable")}`, class: 'success' as const }
     ]
-  }, [category, activeIndustry, data.data, simKpis, baselineKpis])
+  }, [category, activeIndustry, data.data, simKpis, baselineKpis, t])
 
   const displaySlots = useMemo(() => {
     if (category !== "logistics") return data.data[activeIndustry].slots
@@ -108,7 +108,7 @@ export function Dashboard({ category, onBack }: DashboardProps) {
         location: slot.rampId
       } as TimeSlot
     }).sort((a, b) => a.time.localeCompare(b.time))
-  }, [category, activeIndustry, data.data, simSlots, shipments])
+  }, [category, activeIndustry, data.data, simSlots, shipments, t])
 
   const displayComparison = useMemo(() => {
     if (category !== "logistics") return data.data[activeIndustry].comparison

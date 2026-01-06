@@ -12,6 +12,9 @@
         "de": "Deutsch",
         "en": "English"
     },
+    "days": "Days",
+    "day": "Day",
+    "standard": "Standard",
     "greenModule": "Green Module",
     "greenModuleTracking": "CO₂ tracking & environmental metrics",
     "selectIndustry": "Select Industry",

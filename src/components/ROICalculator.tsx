@@ -37,14 +37,14 @@ export function ROICalculator() {
                 <div className="grid grid-cols-2 gap-3">
                     <div className="rounded-lg bg-background border p-3 text-center shadow-sm">
                         <p className="text-[10px] text-muted-foreground uppercase tracking-wider font-bold">{t("roi.monthly")}</p>
-                        <p className="text-lg font-bold text-success">€{roiResult.monthly.totalSavingsEur.toLocaleString()}</p>
+                        <p className="text-lg font-bold text-success">{roiResult.monthly.totalSavingsEur.toLocaleString()}€</p>
                         <p className="text-[10px] text-muted-foreground">
                             {roiInputs.workingDaysPerMonth} {t("common:days")}
                         </p>
                     </div>
                     <div className="rounded-lg bg-background border p-3 text-center shadow-sm">
                         <p className="text-[10px] text-muted-foreground uppercase tracking-wider font-bold">{t("roi.daily")}</p>
-                        <p className="text-lg font-bold text-success">€{roiResult.daily.totalSavingsEur.toLocaleString()}</p>
+                        <p className="text-lg font-bold text-success">{roiResult.daily.totalSavingsEur.toLocaleString()}€</p>
                         <Badge variant="outline" className="text-[10px] h-4 px-1.5 border-success/30 text-success">
                             {t("dashboard:simulation.reduction")}
                         </Badge>
@@ -59,13 +59,13 @@ export function ROICalculator() {
                         <div className="space-y-1.5">
                             <Label className="text-[10px] uppercase font-bold text-muted-foreground">{t("roi.costPerWaitHour")}</Label>
                             <div className="relative">
-                                <span className="absolute left-2 top-1.5 text-xs text-muted-foreground">€</span>
                                 <Input
                                     type="number"
                                     value={roiInputs.costPerWaitHourEur}
                                     onChange={(e) => updateInput("costPerWaitHourEur", Number(e.target.value))}
-                                    className="h-8 text-xs pl-5 bg-background"
+                                    className="h-8 text-xs pr-5 bg-background"
                                 />
+                                <span className="absolute right-2 top-1.5 text-xs text-muted-foreground">€</span>
                             </div>
                         </div>
                         <div className="space-y-1.5">
@@ -78,7 +78,7 @@ export function ROICalculator() {
                     </div>
 
                     <div className="space-y-1.5">
-                        <Label className="text-[10px] uppercase font-bold text-muted-foreground">Working Days / Month</Label>
+                        <Label className="text-[10px] uppercase font-bold text-muted-foreground">{t("roi.workingDaysPerMonth")}</Label>
                         <Select
                             value={roiInputs.workingDaysPerMonth.toString()}
                             onValueChange={(val) => updateInput("workingDaysPerMonth", Number(val))}
@@ -87,10 +87,10 @@ export function ROICalculator() {
                                 <SelectValue />
                             </SelectTrigger>
                             <SelectContent>
-                                <SelectItem value="20">20 Days ({t("common:standard")})</SelectItem>
-                                <SelectItem value="22">22 Days (Logistics Avg)</SelectItem>
-                                <SelectItem value="26">26 Days (High Intensity)</SelectItem>
-                                <SelectItem value="30">30 Days (24/7 Ops)</SelectItem>
+                                <SelectItem value="20">20 {t("common:days")} ({t("common:standard")})</SelectItem>
+                                <SelectItem value="22">22 {t("common:days")} ({t("roi.labels.logisticsAvg")})</SelectItem>
+                                <SelectItem value="26">26 {t("common:days")} ({t("roi.labels.highIntensity")})</SelectItem>
+                                <SelectItem value="30">30 {t("common:days")} ({t("roi.labels.ops247")})</SelectItem>
                             </SelectContent>
                         </Select>
                     </div>
@@ -108,19 +108,19 @@ export function ROICalculator() {
                                 <Clock className="h-3 w-3 text-blue-500" />
                                 {t("roi.waitingCostSaved")}
                             </span>
-                            <span className="font-mono font-bold">€{roiResult.daily.waitSavingsEur}</span>
+                            <span className="font-mono font-bold">{roiResult.daily.waitSavingsEur}€</span>
                         </div>
                         <div className="flex items-center justify-between text-xs">
                             <span className="flex items-center gap-1.5 text-muted-foreground">
                                 <ShieldCheck className="h-3 w-3 text-orange-500" />
-                                SLA Penalties
+                                {t("roi.penaltiesAvoided")}
                             </span>
-                            <span className="font-mono font-bold">€{roiResult.daily.slaSavingsEur}</span>
+                            <span className="font-mono font-bold">{roiResult.daily.slaSavingsEur}€</span>
                         </div>
                         <div className="flex items-center justify-between text-xs border-t border-dashed pt-1.5 mt-1.5">
                             <span className="flex items-center gap-1.5 text-muted-foreground">
                                 <Clock className="h-3 w-3 text-green-600" />
-                                Wait Saved / Truck
+                                {t("roi.waitSavedPerTruck")}
                             </span>
                             <span className="font-mono font-bold text-green-600">
                                 {Math.round(roiResult.deltas.waitSavedMinPerTruck)} min
