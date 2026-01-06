@@ -1,4 +1,4 @@
 {
   "schemaVersion": 2,
-  "dockerfilePath": "Dockerfile"
+  "imageName": "ghcr.io/shreyasbkai2c/ai2ramp-demo-frontend:ece78cf"
 }
