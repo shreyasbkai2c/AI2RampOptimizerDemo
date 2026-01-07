@@ -187,7 +187,7 @@ function RecommendationFeed({ className, onRecClick }: { className?: string; onR
                                                 </div>
                                                 <Button
                                                     size="sm"
-                                                    className="w-full rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground font-bold shadow-sm h-9"
+                                                    className="w-full rounded-xl bg-[#003479] hover:bg-[#002a60] text-primary-foreground font-bold shadow-sm h-9"
                                                     onClick={(e) => handleApply(e, rec)}
                                                 >
                                                     {t("common:actions.apply")}

@@ -27,12 +27,15 @@ export function StatCard({ stat, onClick }: StatCardProps) {
   return (
     <Card
       className={cn(
-        "group cursor-pointer border-l-4 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:scale-[1.01] active:scale-[0.98]",
+        "group cursor-pointer border-l-4 transition-all duration-200 relative overflow-hidden",
+        "hover:-translate-y-1 hover:shadow-lg hover:scale-[1.02] hover:ring-2 hover:ring-primary/10",
+        "active:scale-95 active:shadow-sm active:bg-accent/10",
         borderColors[stat.class as keyof typeof borderColors] || "border-l-primary",
         bgHighlights[stat.class as keyof typeof bgHighlights] || "hover:bg-accent/5"
       )}
       onClick={onClick}
     >
+      <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-primary to-primary/60 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
       <CardContent className="p-6">
         <div className="flex flex-col gap-2">
           <div className="flex items-start justify-between">

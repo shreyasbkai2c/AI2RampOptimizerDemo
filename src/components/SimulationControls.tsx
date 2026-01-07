@@ -1,4 +1,5 @@
 import { useSimulationStore } from "@/store/simulationStore"
+import { cn } from "@/lib/utils"
 import { Label } from "@/components/ui/label"
 import { Switch } from "@/components/ui/switch"
 import {
@@ -183,7 +184,10 @@ export function SimulationControls() {
                     variant={playing ? "secondary" : "default"}
                     size="sm"
                     onClick={playing ? pause : play}
-                    className="rounded-xl h-9 px-4 gap-2 min-w-[100px]"
+                    className={cn(
+                        "rounded-xl h-9 px-4 gap-2 min-w-[100px]",
+                        !playing && "bg-[#003479] hover:bg-[#002a60] text-primary-foreground"
+                    )}
                 >
                     {playing ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
                     {playing ? t("common:actions.pause") : t("common:actions.start")}

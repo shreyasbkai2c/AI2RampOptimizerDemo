@@ -1,4 +1,5 @@
 import { useMemo } from "react"
+import { cn } from "@/lib/utils"
 import { useTranslation } from "react-i18next"
 import logoImage from "@/data/AI2RampOptimizerLogo.png"
 import { Badge } from "@/components/ui/badge"
@@ -87,7 +88,10 @@ export function AppHeader({
           {/* Green module toggle */}
           <Button
             variant={greenModuleEnabled ? "secondary" : "outline"}
-            className="rounded-xl"
+            className={cn(
+              "rounded-xl",
+              greenModuleEnabled && "bg-success/20 hover:bg-success/30 border-success/30 text-black"
+            )}
             onClick={onToggleGreenModule}
           >
             🌱 {t("greenModule")}
@@ -97,7 +101,7 @@ export function AppHeader({
           {onCTAClick && (
             <Button
               variant="default"
-              className="hidden lg:flex rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 font-bold shadow-md hover:shadow-lg transition-all"
+              className="hidden lg:flex rounded-xl bg-[#003479] text-primary-foreground hover:bg-[#002a60] font-bold shadow-md hover:shadow-lg transition-all"
               onClick={onCTAClick}
             >
               🎯 {t("dashboard:cta.title")}

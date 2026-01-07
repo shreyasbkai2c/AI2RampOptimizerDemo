@@ -1,5 +1,6 @@
 import { CategoryCard } from "./CategoryCard"
 import { AI2ConnectLogo } from "./AI2ConnectLogo"
+import secondaryLogo from "@/data/AI2ConnectLogoMitrand.jpg"
 import { useTranslation } from "react-i18next"
 import { useMemo } from "react"
 
@@ -74,8 +75,17 @@ export function LandingPage({ onSelectCategory }: LandingPageProps) {
       <div className="container relative z-10 flex flex-col items-center justify-center px-4 py-20 md:py-32">
         {/* Brand/Hero section */}
         <div className="flex flex-col items-center gap-6 mb-16 text-center max-w-4xl mx-auto">
-          <div className="rounded-2xl bg-card p-3 shadow-sm border border-border">
-            <AI2ConnectLogo size="lg" showText={false} className="text-primary" />
+          <div className="flex items-center gap-6 sm:gap-8 flex-wrap justify-center">
+            <div className="rounded-2xl bg-card p-3 shadow-sm border border-border">
+              <img
+                src={secondaryLogo}
+                alt="Partner Logo"
+                className="h-[120px] w-auto rounded-xl"
+              />
+            </div>
+            <div className="rounded-2xl bg-card p-3 shadow-sm border border-border">
+              <AI2ConnectLogo size="lg" showText={false} className="text-primary" />
+            </div>
           </div>
           <div className="space-y-4">
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-foreground drop-shadow-sm">

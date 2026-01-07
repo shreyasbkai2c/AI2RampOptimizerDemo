@@ -44,7 +44,7 @@ export function ComparisonSection({ comparison }: ComparisonSectionProps) {
         </Card>
 
         {/* After */}
-        <Card className="border-success/20 bg-success/5 transition-all duration-500 hover:shadow-lg hover:-translate-y-1 group relative overflow-hidden">
+        <Card className="border-success/20 bg-success/10 group relative overflow-hidden">
           <div className="absolute top-0 right-0 p-2 overflow-hidden pointer-events-none">
             <div className="bg-success text-white text-[10px] font-bold px-8 py-1 rotate-45 translate-x-3 -translate-y-1 shadow-sm">
               AI OPTIMIZED
@@ -68,7 +68,7 @@ export function ComparisonSection({ comparison }: ComparisonSectionProps) {
                   <p className="text-3xl font-bold tracking-tight text-success md:text-4xl">
                     {metric.value.includes(":") ? t(metric.value as any) : metric.value}
                   </p>
-                  <Badge className="bg-success text-success-foreground hover:bg-success/90 animate-pulse">
+                  <Badge className="bg-success/20 text-success hover:bg-success/20 border-transparent">
                     {t("dashboard:comparison.optimalBadge")}
                   </Badge>
                 </div>
