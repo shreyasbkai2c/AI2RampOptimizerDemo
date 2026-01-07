@@ -154,7 +154,7 @@ export function Dashboard({ category, onBack }: DashboardProps) {
   }
 
   const handleBookDemo = () => {
-    window.open("https://tucalendi.com/ai2connect", "_blank")
+    window.open("https://ai2connect.tucalendi.com/kalendar/ai2rampoptimizer-demo", "_blank")
   }
 
   const getModalTitle = () => {

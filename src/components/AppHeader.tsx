@@ -2,6 +2,7 @@ import { useMemo } from "react"
 import { cn } from "@/lib/utils"
 import { useTranslation } from "react-i18next"
 import logoImage from "@/data/AI2RampOptimizerLogo.png"
+import secondaryLogo from "@/data/AI2ConnectLogoMitrand.jpg"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
@@ -46,6 +47,7 @@ export function AppHeader({
       <div className="container flex flex-col gap-3 py-4 md:flex-row md:items-center md:justify-between">
         {/* Brand */}
         <div className="flex items-center gap-3">
+          <img src={secondaryLogo} alt="AI2Connect Mitrand Logo" className="h-9 w-auto rounded-lg" />
           <img src={logoImage} alt="AI2RampOptimizer Logo" className="h-9 w-auto" />
           <div className="leading-tight">
             <div className="text-base font-semibold tracking-tight text-foreground md:text-lg">
