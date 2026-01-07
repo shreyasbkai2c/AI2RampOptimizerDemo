@@ -33,7 +33,7 @@ export function SimulationControls() {
             <Card className="border-0 shadow-none bg-transparent">
                 <CardHeader className="p-0 pb-3 border-b border-border/50">
                     <CardTitle className="text-sm font-bold flex items-center gap-2">
-                        <Play className="h-4 w-4 text-primary fill-primary/20" />
+
                         <span>{t("dashboard:simulation.title")}</span>
                         <InfoTip
                             title={t("dashboard:infotip.simulation.title")}

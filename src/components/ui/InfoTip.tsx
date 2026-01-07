@@ -40,12 +40,12 @@ export function InfoTip({ title, points, paragraph, className }: InfoTipProps) {
         <button
             type="button"
             className={cn(
-                "inline-flex items-center justify-center rounded-full text-muted-foreground/40 hover:text-primary transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 shrink-0",
+                "inline-flex items-center justify-center rounded-full text-black hover:text-primary transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 shrink-0",
                 className
             )}
             aria-label={`${title} information`}
         >
-            <Info className="h-4 w-4" />
+            <Info className="h-5 w-5" />
         </button>
     )
 
