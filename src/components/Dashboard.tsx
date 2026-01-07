@@ -133,15 +133,6 @@ export function Dashboard({ category, onBack }: DashboardProps) {
     return Object.values(data.benefits)[0] || []
   }, [data.benefits, activeIndustry])
 
-  const handleStatClick = (label: string) => {
-    setModalData(label)
-    setModalType("stat")
-  }
-
-  const handleSlotClick = (slot: TimeSlot) => {
-    setModalData(slot)
-    setModalType("slot")
-  }
 
   const handleCTAClick = () => {
     setModalData(null)
@@ -205,7 +196,7 @@ export function Dashboard({ category, onBack }: DashboardProps) {
 
       <div className="container py-8 md:py-10">
         <div className="space-y-10">
-          <StatsGrid stats={displayStats} onStatClick={handleStatClick} />
+          <StatsGrid stats={displayStats} />
 
           {category === "logistics" && (
             <div className="space-y-10">
@@ -231,7 +222,7 @@ export function Dashboard({ category, onBack }: DashboardProps) {
             <Timeline
               slots={displaySlots}
               title={getTimelineTitle()}
-              onSlotClick={handleSlotClick}
+              onBookDemo={handleBookDemo}
             />
           </div>
 
@@ -253,49 +244,8 @@ export function Dashboard({ category, onBack }: DashboardProps) {
       </div>
 
       {/* shadcn Dialogs (replacing custom Modal) */}
-      <Dialog open={modalType === "stat"} onOpenChange={(o) => !o && handleCloseModal()}>
-        <DialogContent className="rounded-2xl sm:max-w-[560px]">
-          <DialogHeader>
-            <DialogTitle className="text-lg text-foreground">{getModalTitle()}</DialogTitle>
-          </DialogHeader>
 
-          <div className="space-y-4">
-            <StatModalContent label={modalData as string} />
 
-            <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
-              <Button variant="outline" className="rounded-xl" onClick={handleCloseModal}>
-                {t("common:close")}
-              </Button>
-              <Button className="rounded-xl" onClick={handleBookDemo}>
-                {t("common:bookDemo")}
-              </Button>
-            </div>
-          </div>
-        </DialogContent>
-      </Dialog>
-
-      <Dialog open={modalType === "slot"} onOpenChange={(o) => !o && handleCloseModal()}>
-        <DialogContent className="rounded-2xl sm:max-w-[560px]">
-          <DialogHeader>
-            <DialogTitle className="text-lg text-foreground">{getModalTitle()}</DialogTitle>
-          </DialogHeader>
-
-          <div className="space-y-4">
-            {modalData && typeof modalData !== "string" && (
-              <SlotModalContent slot={modalData as TimeSlot} />
-            )}
-
-            <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
-              <Button variant="outline" className="rounded-xl" onClick={handleCloseModal}>
-                {t("common:close")}
-              </Button>
-              <Button className="rounded-xl" onClick={handleBookDemo}>
-                {t("common:bookDemo")}
-              </Button>
-            </div>
-          </div>
-        </DialogContent>
-      </Dialog>
 
       <Dialog open={modalType === "cta"} onOpenChange={(o) => !o && handleCloseModal()}>
         <DialogContent className="rounded-2xl sm:max-w-[560px]">

@@ -395,7 +395,7 @@ export function SlotModalContent({ slot }: SlotModalContentProps) {
         <div className="flex items-center justify-between gap-4">
           <div className="space-y-1">
             <h4 className="text-base font-bold text-foreground">
-              {slot.time} — {slot.truck}
+              {slot.time}{slot.location ? ` — ${slot.location}` : ""} — {slot.truck}
             </h4>
             <Badge className="bg-success text-success-foreground hover:bg-success/90">
               {t("dashboard:modal.aiRecommendation")}
@@ -438,7 +438,7 @@ export function SlotModalContent({ slot }: SlotModalContentProps) {
         <div className="flex items-center justify-between gap-4">
           <div className="space-y-1">
             <h4 className="text-base font-bold text-foreground">
-              {slot.time} — {slot.truck}
+              {slot.time}{slot.location ? ` — ${slot.location}` : ""} — {slot.truck}
             </h4>
             <Badge variant="destructive">{t("dashboard:modal.criticalDelivery")}</Badge>
           </div>
@@ -475,15 +475,17 @@ export function SlotModalContent({ slot }: SlotModalContentProps) {
   return (
     <div className="space-y-4 py-2">
       <div className="space-y-1">
-        <h4 className="text-base font-bold text-foreground">
-          {slot.time}{slot.location ? ` — ${slot.location}` : ""}
-        </h4>
-        <p className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
-          {slot.status === "busy" ? t("dashboard:modal.busy") : t("dashboard:modal.available")}
-        </p>
+        <div className="flex items-center justify-between">
+          <h4 className="text-base font-bold text-foreground">
+            {slot.time}{slot.location ? ` — ${slot.location}` : ""}
+          </h4>
+          <p className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
+            {slot.status === "busy" ? t("dashboard:modal.busy") : t("dashboard:modal.available")}
+          </p>
+        </div>
+        <p className="text-sm font-semibold text-foreground">{slot.truck}</p>
       </div>
       <div className="space-y-3">
-        <p className="text-sm font-semibold text-foreground">{slot.truck}</p>
         <p className="text-sm text-muted-foreground leading-relaxed">{slot.info}</p>
         <p className="text-sm text-muted-foreground italic border-l-2 pl-3 py-1">{slot.details}</p>
       </div>

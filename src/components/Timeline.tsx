@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from "react"
+import { useState, useMemo, useEffect, Fragment } from "react"
 import { cn } from "@/lib/utils"
 import type { TimeSlot } from "@/data/categoryData"
 import {
@@ -19,24 +19,26 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Button } from "@/components/ui/button"
-import { Search, RotateCcw, ChevronLeft, ChevronRight, Calendar } from "lucide-react"
+import { Search, RotateCcw, ChevronLeft, ChevronRight, Play, Calendar } from "lucide-react"
 import { translate } from "@/lib/i18n-utils"
 import { useTranslation } from "react-i18next"
+import { SlotModalContent } from "./Modal"
 
 interface TimelineProps {
   slots: TimeSlot[]
   title: string
-  onSlotClick: (slot: TimeSlot) => void
+  onBookDemo: () => void
 }
 
 const ITEMS_PER_PAGE = 5
 
 import { InfoTip } from "@/components/ui/InfoTip"
 
-export function Timeline({ slots, title, onSlotClick }: TimelineProps) {
+export function Timeline({ slots, title, onBookDemo }: TimelineProps) {
   const [search, setSearch] = useState("")
   const [statusFilter, setStatusFilter] = useState<string>("all")
   const [currentPage, setCurrentPage] = useState(1)
+  const [expandedId, setExpandedId] = useState<string | null>(null)
   const { t } = useTranslation(["dashboard", "common"])
 
   const filteredSlots = useMemo(() => {
@@ -135,48 +137,73 @@ export function Timeline({ slots, title, onSlotClick }: TimelineProps) {
             <Table>
               <TableHeader>
                 <TableRow className="bg-muted/50 border-b-border">
+                  <TableHead className="w-[50px]"></TableHead>
                   <TableHead className="w-[100px] text-foreground font-semibold">{t("dashboard:timeline.headers.time")}</TableHead>
                   <TableHead className="text-foreground font-semibold">{t("dashboard:timeline.headers.truck")}</TableHead>
                   <TableHead className="hidden md:table-cell text-foreground font-semibold">{t("dashboard:timeline.headers.details")}</TableHead>
                   <TableHead className="text-foreground font-semibold">{t("dashboard:timeline.headers.status")}</TableHead>
-                  <TableHead className="text-right text-foreground font-semibold">{t("dashboard:timeline.headers.action")}</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {paginatedSlots.length > 0 ? (
-                  paginatedSlots.map((slot, index) => (
-                    <TableRow
-                      key={slot.id}
-                      className="cursor-pointer transition-colors hover:bg-muted/30 border-b-border"
-                      onClick={() => onSlotClick(slot)}
-                    >
-                      <TableCell className="font-bold text-foreground">{slot.time}</TableCell>
-                      <TableCell>
-                        <div className="flex flex-col">
-                          <span className="font-medium text-foreground">
-                            {translate(t, slot.truck)}
-                          </span>
-                          <span className="text-xs text-muted-foreground">{slot.location}</span>
-                        </div>
-                      </TableCell>
-                      <TableCell className="hidden md:table-cell">
-                        <div className="flex flex-col gap-0.5">
-                          <span className="text-sm text-foreground/90">
-                            {translate(t, slot.info)}
-                          </span>
-                          <span className="text-xs text-muted-foreground">
-                            {translate(t, slot.details)}
-                          </span>
-                        </div>
-                      </TableCell>
-                      <TableCell>{getStatusBadge(slot.status)}</TableCell>
-                      <TableCell className="text-right">
-                        <Button variant="outline" size="sm" className="rounded-lg font-semibold border-primary/30 text-primary hover:bg-primary hover:text-white transition-all shadow-sm">
-                          {t("dashboard:timeline.detailsButton")}
-                        </Button>
-                      </TableCell>
-                    </TableRow>
-                  ))
+                  paginatedSlots.map((slot, index) => {
+                    const isExpanded = expandedId === slot.id
+                    return (
+                      <Fragment key={slot.id}>
+                        <TableRow
+                          className={cn(
+                            "cursor-pointer transition-colors border-b-border",
+                            isExpanded ? "bg-muted/50" : "hover:bg-muted/30"
+                          )}
+                          onClick={() => setExpandedId(isExpanded ? null : slot.id)}
+                        >
+                          <TableCell className="w-[50px] text-center">
+                            <Play
+                              className={cn(
+                                "h-4 w-4 transition-transform duration-200",
+                                isExpanded ? "text-primary rotate-90 fill-primary" : "text-muted-foreground fill-muted-foreground/30"
+                              )}
+                            />
+                          </TableCell>
+                          <TableCell className="font-bold text-foreground">{slot.time}</TableCell>
+                          <TableCell>
+                            <span className="font-medium text-foreground">
+                              {translate(t, slot.truck)}
+                            </span>
+                          </TableCell>
+                          <TableCell className="hidden md:table-cell">
+                            <span className="text-sm text-foreground/90">
+                              {translate(t, slot.info)}
+                            </span>
+                          </TableCell>
+                          <TableCell>{getStatusBadge(slot.status)}</TableCell>
+                        </TableRow>
+                        {isExpanded && (
+                          <TableRow className="bg-muted/20 border-b-border hover:bg-muted/20">
+                            <TableCell colSpan={5} className="p-0">
+                              <div className="px-6 py-6 animate-in slide-in-from-top-2 duration-200">
+                                <div className="max-w-xl mx-auto space-y-4">
+                                  <SlotModalContent slot={slot} />
+                                  <div className="flex justify-end pt-2 border-t border-border/50">
+                                    <Button
+                                      size="sm"
+                                      className="rounded-xl px-6 h-9 font-bold"
+                                      onClick={(e) => {
+                                        e.stopPropagation()
+                                        onBookDemo()
+                                      }}
+                                    >
+                                      {t("common:bookDemo")}
+                                    </Button>
+                                  </div>
+                                </div>
+                              </div>
+                            </TableCell>
+                          </TableRow>
+                        )}
+                      </Fragment>
+                    )
+                  })
                 ) : (
                   <TableRow>
                     <TableCell colSpan={5} className="h-24 text-center text-muted-foreground font-medium">
